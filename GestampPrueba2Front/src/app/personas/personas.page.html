@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Personas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h3>Personas (Tabla personas)</h3>
+  <table class="table table-striped" *ngIf="personasArray">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Acciones</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let persona of personasArray">
+        <td>{{ persona.id}}</td>
+        <td>{{ persona.nombre }}</td>
+        <td>{{ persona.apellido }}</td>
+        <td>{{ persona.edad }}</td>
+        <td><button type="button" class="btn btn-info" (click)="mostrar(persona)"> Mostrar</button></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <form #form="ngForm" (ngSubmit)="savePersona(form)">
+    <ion-item>
+      <ion-label>Nombre: </ion-label>
+      <ion-input type="text" [(ngModel)]="personas.nombre" name="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido: </ion-label>
+      <ion-input  type="text" [(ngModel)]="personas.apellido" name="apellido" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edad: </ion-label>
+      <ion-input type="number" [(ngModel)]="personas.edad" name="edad" required></ion-input>
+    </ion-item>
+    <ion-button  size="large" type="submit" expand="block">Guardar</ion-button>
+  </form>
+
+  <h3>Usuarios (Tabla usuarios)</h3>
+  <table class="table table-striped" >
+    <thead>
+      <tr class="ion-justify-content-center">
+        <th>Id</th>
+        <th>Nombre Usuario</th>
+        <th>Contraseña</th>
+        <th>Email</th>
+        <th>Activo/Inactivo</th>
+        <th>Img</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let usuario of usersArray">
+      <tr *ngIf="usuario.activo" >
+        <td>{{ usuario.id}}</td>
+        <td>{{ usuario.nombreUsuario }}</td>
+        <td>{{ usuario.contrasena }}</td>
+        <td>{{ usuario.email }}</td>
+        <td><ion-toggle name="activo" color="light" [checked]="usuario.activo" (click)="modificar(usuario)"></ion-toggle> </td>
+        <td><img src="{{ usuario.img }}"/></td>
+        <!--<td><button type="button" class="btn btn-info" (click)="mostrar(persona)"> Mostrar</button></td>-->
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

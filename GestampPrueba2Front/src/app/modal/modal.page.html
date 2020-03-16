@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+    </ion-buttons>
+    <ion-title>Actualizar Persona</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+
+  <form #form="ngForm" (ngSubmit)="acciones()">
+    <ion-item>
+      <ion-label>Id: </ion-label>
+      <ion-input  [(ngModel)]="persona.id" name="id" disabled required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre: </ion-label>
+      <ion-input type="text" [(ngModel)]="persona.nombre" name="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido: </ion-label>
+      <ion-input type="text" [(ngModel)]="persona.apellido" name="apellido" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edad: </ion-label>
+      <ion-input type="number" [(ngModel)]="persona.edad" name="edad" required></ion-input>
+    </ion-item>
+    <ion-button  size="large" type="submit" expand="block" >Actualizar</ion-button>
+  </form>
+
+</ion-content>
