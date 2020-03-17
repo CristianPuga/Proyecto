@@ -62,8 +62,7 @@ namespace GestampPrueba2.Controllers
                     Console.WriteLine("Usuario Correcto, generando token...");
                     return Ok(new
                     {
-                        token = new JwtSecurityTokenHandler().WriteToken(token),
-                        expiration = token.ValidTo
+                        token = new JwtSecurityTokenHandler().WriteToken(token)
                     });
 
 

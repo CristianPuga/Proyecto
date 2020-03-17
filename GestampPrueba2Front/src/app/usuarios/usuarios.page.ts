@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserEntity } from '../models/user.entity';
 import { UsuariosService } from './services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuarios',
@@ -9,7 +10,7 @@ import { UsuariosService } from './services/usuarios.service';
 })
 export class UsuariosPage implements OnInit {
 
-  constructor(private usuariosService:UsuariosService) { }
+  constructor(private router:Router,private usuariosService:UsuariosService) { }
 
   usersArray = []
   users:UserEntity;
@@ -55,6 +56,11 @@ export class UsuariosPage implements OnInit {
 
     console.log("Usuario actualizado");
     console.log(this.usersArray);
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 
 }
