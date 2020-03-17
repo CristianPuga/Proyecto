@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GestampPrueba2.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestampPrueba2.Controllers
 {
+    [Authorize]
     [Route("/personas")]
     //[ApiController]
     public class Personas3Controller : ControllerBase

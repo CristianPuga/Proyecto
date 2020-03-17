@@ -7,6 +7,7 @@ import { ModalPage } from '../modal/modal.page';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { UserEntity } from '../models/user.entity';
+import { tokenName } from '@angular/compiler';
 
 @Component({
   selector: 'app-personas',
@@ -86,10 +87,11 @@ export class PersonasPage implements OnInit {
 
   savePersona(){
     console.log(this.personas);
-
+    let token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+        'Content-Type':  'application/json'
       })
     };
 
@@ -143,5 +145,10 @@ export class PersonasPage implements OnInit {
         return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1)
       })
     }
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
   }
 }

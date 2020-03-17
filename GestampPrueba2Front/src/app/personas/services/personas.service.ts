@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 //import { Persona } from 'src/app/models/persona';
 import { PersonasEntity } from '../../models/personas.entity';
 import { Router } from '@angular/router';
+import { tokenName } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,19 @@ export class PersonasService {
 
   constructor(private http:HttpClient, private alertController: AlertController, private router:Router) {
     this.persona = new PersonasEntity();
+    
    }
   persona = {};
+  
 
   getPersonas(): Observable<any>{
-    return this.http.get('http://localhost:5000/personas');
+    let token = localStorage.getItem('token');
+    return this.http.get('http://localhost:5000/personas', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }) });
   }
 
   deletePersona(persona){
-    this.http.delete('http://localhost:5000/personas/' + persona.id).subscribe(
+    let token = localStorage.getItem('token');
+    this.http.delete('http://localhost:5000/personas/' + persona.id, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }) }).subscribe(
               (val) => {
                   console.log("DELETE call successful value returned in body");
               },
@@ -51,16 +56,15 @@ export class PersonasService {
   }
 
   updatePersona(persona){ 
-   // console.log(persona.id);
-   // console.log(persona);
-    //let persona2 = JSON.stringify(form.value)
-    //console.log(persona2);
+    
     this.persona = persona;
+    let token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+        'Content-Type':  'application/json'
       })
-    };
+    }
 
     this.http.put('http://localhost:5000/personas/' + persona.id,this.persona, httpOptions).subscribe(
       (val) => {

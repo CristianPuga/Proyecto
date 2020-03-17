@@ -27,11 +27,11 @@ export class AppComponent implements OnInit {
       url: '/personas',
       icon: 'list'
     },
-    /*{
+    {
       title: 'Usuarios',
       url: '/usuarios',
       icon: 'list'
-    }*/
+    }
   ];
 
   constructor(

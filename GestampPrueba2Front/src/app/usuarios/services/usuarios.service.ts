@@ -23,8 +23,9 @@ export class UsuariosService {
     let token = localStorage.getItem("token");    
     const httpOptions = {
       headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
         'Content-Type':  'application/json',
-        'Authorization': 'Bearer' + token
+        
       })
     };
     return this.http.put('http://localhost:5000/usuarios/' + user.id, user, httpOptions);
