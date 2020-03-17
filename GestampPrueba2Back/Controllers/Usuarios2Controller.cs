@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestampPrueba2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestampPrueba2.Controllers
 {
+    [Authorize]
     [Route("/usuarios")]
     //[ApiController]
     public class Usuarios2Controller : ControllerBase
