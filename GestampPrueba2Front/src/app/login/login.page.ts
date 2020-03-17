@@ -38,8 +38,7 @@ export class LoginPage implements OnInit {
     var router2 = this.router;
     console.log(form.value);
     this.users.map(function(item){
-      console.log(item.nombreUsuario);
-      if(item.nombreUsuario==form.value.nombre_usuario&&item.contrasena==form.value.contrasena){
+      if(item.nombreUsuario==form.value.nombreUsuario&&item.contrasena==form.value.contrasena){
         console.log("Usuario logueado correctamente");
         router2.navigate(['/personas']);
       }else{

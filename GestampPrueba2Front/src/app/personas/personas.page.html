@@ -8,6 +8,7 @@
 </ion-header>
 <ion-content>
   <h3>Personas (Tabla personas)</h3>
+  <ion-searchbar type="search" [animated]="true" [showCancelButton]="false" (ionInput)="getItems($event)"></ion-searchbar>
   <table class="table table-striped" *ngIf="personasArray">
     <thead>
       <tr>
@@ -20,12 +21,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let persona of personasArray">
+      <tr *ngFor="let persona of items">
         <td>{{ persona.id}}</td>
         <td>{{ persona.nombre }}</td>
         <td>{{ persona.apellido }}</td>
         <td>{{ persona.edad }}</td>
         <td><button type="button" class="btn btn-info" (click)="mostrar(persona)"> Mostrar</button></td>
+
       </tr>
     </tbody>
 

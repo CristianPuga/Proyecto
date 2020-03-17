@@ -26,5 +26,18 @@ export class ModalPage implements OnInit {
     console.log(this.persona);
     this.personasService.updatePersona(this.persona);
   }
+
+  async closeModal() {
+    const onClosedData: string = "Wrapped Up!";
+    await this.modalController.dismiss(onClosedData);
+  }
+
+  /*dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalController.dismiss({
+      'dismissed': true
+    });
+  }*/
 }
 

@@ -21,9 +21,9 @@ export class PersonasPage implements OnInit {
     private router:Router, private personasService: PersonasService,
     private modalController: ModalController,  private http:HttpClient,
     private cdRef: ChangeDetectorRef) { 
+      this.reload();
     }
-
-    
+    items:any;
     personasArray = [];
     personas:PersonasEntity;
 
@@ -32,16 +32,16 @@ export class PersonasPage implements OnInit {
       this.reload();
     }
 
-    async mostarModal(persona) {
-     const modal = await this.modalController.create({
-      component: ModalPage,
-      componentProps: {
-        'persona': persona,
-      }
-    
-    });
-    return await modal.present();
-  }
+    async presentModal(persona) {
+      const modal = await this.modalController.create({
+       component: ModalPage,
+       componentProps: {
+         'persona': persona,
+       }
+     
+     });
+     return await modal.present();
+   }
 
   async mostrar(persona){
     const alert = await this.alertController.create({
@@ -49,8 +49,7 @@ export class PersonasPage implements OnInit {
       message: `¿Que deseas hacer con ${persona.nombre} ${persona.apellido}?`,
       buttons: [
         {text: 'Cancel'},
-        {
-          text: 'Delete',
+        {text: 'Delete',
           handler: () => {
             console.log('Confirm Delete');
             this.personasService.deletePersona(persona);
@@ -60,7 +59,7 @@ export class PersonasPage implements OnInit {
         {
           text: 'Update',
           handler: ()=>{
-            this.mostarModal(persona);
+           this.presentModal(persona);
           }
         }
       ]
@@ -68,13 +67,13 @@ export class PersonasPage implements OnInit {
     await alert.present();
   }
 
-
   reload(){
       this.personasService.getPersonas().subscribe(
         (val) => {
             console.log("POST call successful value returned in body");
             console.log(val);
             this.personasArray = val;
+            this.items = val;            
         },
         response => {
             console.log("POST call in error", response);
@@ -132,5 +131,17 @@ export class PersonasPage implements OnInit {
     } catch (error) {
       
     }  
+    
+  }
+
+  getItems(event: any){
+
+    let val = event.target.value;    
+    if(val && val.trim() != ''){
+      this.items = this.items.filter((item) => {
+        console.log(this.items);
+        return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1)
+      })
+    }
   }
 }
