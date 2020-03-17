@@ -43,7 +43,7 @@ namespace GestampPrueba2
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:8100")
+                    builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowAnyMethod();
@@ -81,9 +81,9 @@ namespace GestampPrueba2
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
