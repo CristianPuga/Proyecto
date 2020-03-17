@@ -26,8 +26,6 @@ export class PersonasPage implements OnInit {
     
     personasArray = [];
     personas:PersonasEntity;
-    usersArray = []
-    users:UserEntity;
 
     ngOnInit() {
       this.personas = new PersonasEntity();
@@ -72,19 +70,6 @@ export class PersonasPage implements OnInit {
 
 
   reload(){
-    this.personasService.getUsuarios().subscribe(
-      (val) => {
-          console.log("POST call successful value returned in body");
-          console.log(val);
-          this.usersArray = val;
-      },
-      response => {
-          console.log("POST call in error", response);
-      },
-      () => {
-          console.log("The POST observable is now completed.");
-      });
-
       this.personasService.getPersonas().subscribe(
         (val) => {
             console.log("POST call successful value returned in body");
@@ -146,34 +131,6 @@ export class PersonasPage implements OnInit {
       
     } catch (error) {
       
-    }
-    
-    
+    }  
   }
-
-  modificar(usuario){
-    console.log("Usuario es " +usuario.id);
-    usuario.activo= !usuario.activo;
-    // guardar el objeto para actualizar
-    console.log(usuario.activo);
-    
-    this.personasService.updateActivo(usuario).subscribe(
-      (val) => {
-          console.log("POST call successful value returned in body");
-          console.log("usuario:" +val); 
-          this.reload();
-      },
-      response => {
-          console.log("POST call in error", response);
-      },
-      () => {
-          console.log("The POST observable is now completed.");
-          //window.location.reload();
-      }); 
-    this.personasService.getUsuarios();
-
-    console.log("Usuario actualizado");
-    console.log(this.usersArray);
-  }
-
 }

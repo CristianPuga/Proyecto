@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3>Usuarios (Tabla usuarios)</h3>
+  <table class="table table-striped" >
+    <thead>
+      <tr class="ion-justify-content-center">
+        <th>Id</th>
+        <th>Nombre Usuario</th>
+        <th>Contraseña</th>
+        <th>Email</th>
+        <th>Activo/Inactivo</th>
+        <th>Img</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let usuario of usersArray">
+      <tr>
+        <td>{{ usuario.id}}</td>
+        <td>{{ usuario.nombreUsuario }}</td>
+        <td>{{ usuario.contrasena }}</td>
+        <td>{{ usuario.email }}</td>
+        <td><ion-toggle name="activo" color="light" [checked]="usuario.activo" (click)="modificar(usuario)"></ion-toggle> </td>
+        <td><img src="{{ usuario.img }}"/></td>
+        <!--<td><button type="button" class="btn btn-info" (click)="mostrar(persona)"> Mostrar</button></td>-->
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

@@ -26,12 +26,12 @@ export class AppComponent implements OnInit {
       title: 'Personas',
       url: '/personas',
       icon: 'list'
-    }/*,
-    {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
     },
+    {
+      title: 'Usuarios',
+      url: '/usuarios',
+      icon: 'list'
+    }/*,
     {
       title: 'Archived',
       url: '/folder/Archived',

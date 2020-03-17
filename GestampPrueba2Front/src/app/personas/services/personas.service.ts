@@ -77,25 +77,6 @@ export class PersonasService {
           window.location.reload();
       });
   }
-
-
-
-
-  getUsuarios(): Observable<any>{
-    return this.http.get('http://localhost:5000/usuarios');
-  }
-
-  updateActivo(user){
-    console.log("Activando...");
-    console.log(user);
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
-    return this.http.put('http://localhost:5000/usuarios/' + user.id, user, httpOptions);
-  }
 }
 
 
