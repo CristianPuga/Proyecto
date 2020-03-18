@@ -12,56 +12,90 @@ import { tokenName } from '@angular/compiler';
 })
 export class PersonasService {
 
-  constructor(private http:HttpClient, private alertController: AlertController, private router:Router) {
+  constructor(private http:HttpClient, 
+    private alertController: AlertController, 
+    private router:Router) 
+  {
     this.persona = new PersonasEntity();
-    
-   }
+  }
   persona = {};
-  
 
+  //Obtener a las personas que hay en una base de datos
   getPersonas(): Observable<any>{
-    let token = localStorage.getItem('token');
-    return this.http.get('http://localhost:5000/personas', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }) });
+    return this.http.get('http://localhost:5000/personas');
   }
 
+  //Borrar a una persona de la base de datos por ID
   deletePersona(persona){
-    let token = localStorage.getItem('token');
-    this.http.delete('http://localhost:5000/personas/' + persona.id, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }) }).subscribe(
-              (val) => {
-                  console.log("DELETE call successful value returned in body");
-              },
-              response => {
-                  console.log("DELETE call in error", response);
-              },
-              async () => {
-                  console.log("The DELETE observable is now completed.");
-                  
-                  const alert = await this.alertController.create({
-                    header: 'Exito',
-                    message: 'La publicación ha sido borrada con exito',
-                    buttons: [
-                      {
-                        text: 'Okay',
-                        handler: () => {
-                          console.log('Confirm Okay');
-                          window.location.reload(true);
-                        }
-                      }
-                    ]
-                  });
-              
-                  await alert.present();
-                  
-              });
+    this.http.delete('http://localhost:5000/personas/' + persona.id).subscribe(
+      (val) => {
+        console.log("DELETE call successful value returned in body");
+      },
+      response => {
+        console.log("DELETE call in error", response);
+      },
+      async () => {
+        console.log("The DELETE observable is now completed.");
+        const alert = await this.alertController.create({
+        header: 'Exito',
+        message: 'La publicación ha sido borrada con exito',
+        buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+          console.log('Confirm Okay');
+          window.location.reload(true);
+          }
+        }
+        ]
+        });
+      await alert.present();
+      }
+    );
   }
 
+
+  savePersona(persona){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    this.http.post('http://localhost:5000/personas', persona, httpOptions)
+      .subscribe(
+        (val) => {
+          console.log(val);
+          console.log("POST call successful value returned in body");
+        },
+        response => {
+          console.log("POST call in error", response);
+        },
+        async () => {
+          console.log("The POST observable is now completed.");
+          const alert = await this.alertController.create({
+            header: 'Exito',
+            message: 'La persona ha sido guardada con exito',
+            buttons: [
+              {
+                text: 'Okay',
+                handler: () => {
+                  console.log('Confirm Okay');
+                  this.router.navigate(["/personas"]);
+                  window.location.reload(true);
+                }
+              }
+            ]
+          });
+        await alert.present();
+      });
+  }
+
+  //Modificar datos de una persona de la base de datos
   updatePersona(persona){ 
     
     this.persona = persona;
-    let token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token,
         'Content-Type':  'application/json'
       })
     }

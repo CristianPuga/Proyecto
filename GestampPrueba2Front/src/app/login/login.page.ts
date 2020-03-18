@@ -11,23 +11,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginPage implements OnInit {
 
-  users:UserEntity[] = [];
-  uri = 'http://localhost:5000/api';
-  token;
-
   constructor(private router:Router,private http:HttpClient, private loginService:LoginService) { }
 
   ngOnInit() {
   }
 
-
   login(form){
-    console.log(form.value);
-    this.http.post(this.uri + '/token', {nombreUsuario: form.value.nombreUsuario,contrasena:form.value.contrasena})
-    .subscribe((resp: any) => {
-      this.router.navigate(['usuarios']);
-      localStorage.setItem('token', resp.token);
-      
-    })
-  };  
+    this.loginService.login(form);
+  }
 }

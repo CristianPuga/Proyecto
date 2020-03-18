@@ -50,7 +50,6 @@ export class UsuariosPage implements OnInit {
       },
       () => {
           console.log("The POST observable is now completed.");
-          //window.location.reload();
       }); 
     this.usuariosService.getUsuarios();
 

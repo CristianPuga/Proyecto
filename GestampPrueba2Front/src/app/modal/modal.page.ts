@@ -13,11 +13,10 @@ export class ModalPage implements OnInit {
   personaToUpdate = {};
 
   constructor(private modalController: ModalController,
-     private personasService:PersonasService, navParams: NavParams) { 
+    private personasService:PersonasService, navParams: NavParams) { 
       console.log(navParams.get('persona'));
       this.persona = navParams.get('persona');
-    
-     }
+    }
 
   ngOnInit() {
   }
@@ -31,13 +30,5 @@ export class ModalPage implements OnInit {
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
   }
-
-  /*dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
-    this.modalController.dismiss({
-      'dismissed': true
-    });
-  }*/
 }
 

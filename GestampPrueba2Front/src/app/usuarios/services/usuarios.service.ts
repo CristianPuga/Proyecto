@@ -7,24 +7,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UsuariosService {
 
-  constructor(private http:HttpClient) { }
+  //private isUserLoggedIn;
 
+  constructor(private http:HttpClient) { 
+    //this.isUserLoggedIn = false;
+  }
+
+/*
+  getUserLoggedIn(){
+    if (localStorage.getItem('token')){
+      this.isUserLoggedIn = true;
+    }else{
+      console.log("El usuario no esta logueado");
+      
+    }
+  }*/
 
 
   getUsuarios(): Observable<any>{
-    console.log("Estoy en getUsuarios");
-    let token = localStorage.getItem("token");
-    return this.http.get('http://localhost:5000/usuarios', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }) });
+    console.log("Obteniendo usuarios....");
+    return this.http.get('http://localhost:5000/usuarios');
   }
 
   updateActivo(user){
     console.log("Activando...");
     console.log(user);
-    let token = localStorage.getItem("token");    
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token,
-        'Content-Type':  'application/json',
+        'Content-Type':  'application/json'
         
       })
     };

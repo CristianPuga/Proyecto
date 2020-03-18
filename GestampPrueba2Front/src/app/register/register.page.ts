@@ -15,7 +15,6 @@ export class RegisterPage implements OnInit {
 
   register(form){
     console.log(form.value);
-    this.registerService.guardarUsuario(form);
-    
+    this.registerService.guardarUsuario(form); 
   }
 }

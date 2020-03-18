@@ -9,7 +9,7 @@
 </ion-header>
 <ion-content>
   <h3>Personas (Tabla personas)</h3>
-  <ion-searchbar type="search" [animated]="true" [showCancelButton]="false" (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-searchbar type="search" [animated]="true" [showCancelButton]="false" (ionInput)="busqueda($event)"></ion-searchbar>
   <table class="table table-striped" *ngIf="personasArray">
     <thead>
       <tr>

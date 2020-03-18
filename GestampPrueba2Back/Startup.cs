@@ -17,6 +17,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace GestampPrueba2
 {
@@ -50,6 +53,14 @@ namespace GestampPrueba2
                 });
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("api", new OpenApiInfo { Title = "Gestamp API", Version = "v1" });
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //c.IncludeXmlComments(xmlPath);
+            });
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
@@ -75,7 +86,15 @@ namespace GestampPrueba2
                 app.UseDeveloperExceptionPage();
             }
 
-           app.UseCors(MyAllowSpecificOrigins);
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/api/swagger.json", "Gestamp Api v1");
+                c.RoutePrefix = string.Empty;
+            });
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 

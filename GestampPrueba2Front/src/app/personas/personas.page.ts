@@ -17,6 +17,9 @@ import { tokenName } from '@angular/compiler';
 
 export class PersonasPage implements OnInit {
 
+  items:any;
+  personasArray = [];
+  personas:PersonasEntity;
 
   constructor(public alertController: AlertController,
     private router:Router, private personasService: PersonasService,
@@ -24,9 +27,6 @@ export class PersonasPage implements OnInit {
     private cdRef: ChangeDetectorRef) { 
       this.reload();
     }
-    items:any;
-    personasArray = [];
-    personas:PersonasEntity;
 
     ngOnInit() {
       this.personas = new PersonasEntity();
@@ -69,7 +69,7 @@ export class PersonasPage implements OnInit {
   }
 
   reload(){
-      this.personasService.getPersonas().subscribe(
+    this.personasService.getPersonas().subscribe(
         (val) => {
             console.log("POST call successful value returned in body");
             console.log(val);
@@ -84,59 +84,19 @@ export class PersonasPage implements OnInit {
         });
   }
 
-
+  //Guardar a una persona en la base de datos
   savePersona(){
     console.log(this.personas);
-    let token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token,
-        'Content-Type':  'application/json'
-      })
-    };
-
     try {
-
-      this.http.post('http://localhost:5000/personas', this.personas, httpOptions)
-      .subscribe(
-          (val) => {
-            console.log(val);
-              console.log("POST call successful value returned in body");
-          },
-          response => {
-              console.log("POST call in error", response);
-          },
-          async () => {
-              console.log("The POST observable is now completed.");
-              
-              const alert = await this.alertController.create({
-                header: 'Exito',
-                message: 'La persona ha sido guardada con exito',
-                buttons: [
-                  {
-                    text: 'Okay',
-                    handler: () => {
-                      console.log('Confirm Okay');
-                      this.router.navigate(["/personas"]);
-                      return this.reload();
-                    }
-                  }
-                ]
-              });
-          
-              await alert.present();
-              
-          });
-
+      this.personasService.savePersona(this.personas);
       console.log("post done");
-      
+      this.reload();
     } catch (error) {
-      
     }  
-    
   }
 
-  getItems(event: any){
+  //Poder buscar por barra de busqueda
+  busqueda(event: any){
 
     let val = event.target.value;    
     if(val && val.trim() != ''){
@@ -147,6 +107,7 @@ export class PersonasPage implements OnInit {
     }
   }
 
+  //Deslogearse y borrar el token
   logOut() {
     localStorage.removeItem('token');
     this.router.navigate(['login']);

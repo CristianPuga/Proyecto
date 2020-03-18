@@ -1,37 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-usersDB=[];
+  uri = 'http://localhost:5000/api';
+  token;
+  constructor(private http:HttpClient, private router: Router) { }
 
-  constructor(private http:HttpClient) { }
-
-
-  consultarUsuarios(){
-    var usuario = this.getUsers();
-    console.log(usuario)
-    usuario.subscribe(result =>{
-      if(result.code!=200){
-        console.log(result);
-        this.usersDB = result;
-        console.log(this.usersDB);
-                
-      }else{
-        console.log("Error");
-      }
-    },
-    error=>{
-      console.log(<any>error);
-      
+  login(form){
+    console.log(form.value);
+    this.http.post(this.uri + '/token', {nombreUsuario: form.value.nombreUsuario,contrasena:form.value.contrasena})
+    .subscribe((resp: any) => {
+      this.router.navigate(['usuarios']);
+      localStorage.setItem('token', resp.token);  
     })
-  }
-
-  getUsers():Observable<any>{
-   return this.http.get('http://localhost:5000/usuarios');
-  }
+  };  
 }
