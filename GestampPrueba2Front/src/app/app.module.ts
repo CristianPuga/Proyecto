@@ -11,8 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalPageModule } from './modal/modal.module';
-import { AuthService } from './login/services/auth.service';
-
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +22,7 @@ import { AuthService } from './login/services/auth.service';
     AppRoutingModule,
     HttpClientModule,
     NgxDatatableModule,
-    ModalPageModule
+    ModalPageModule,
   ],
   providers: [
     {

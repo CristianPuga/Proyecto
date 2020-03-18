@@ -11,8 +11,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router:Router,private http:HttpClient, private loginService:LoginService) { }
-
+  constructor(private router:Router,private http:HttpClient, private loginService:LoginService) {     var a = localStorage.getItem('token')
+}
   ngOnInit() {
   }
 

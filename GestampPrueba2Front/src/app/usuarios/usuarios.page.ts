@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserEntity } from '../models/user.entity';
 import { UsuariosService } from './services/usuarios.service';
 import { Router } from '@angular/router';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,10 +13,17 @@ import { Router } from '@angular/router';
 })
 export class UsuariosPage implements OnInit {
 
-  constructor(private router:Router,private usuariosService:UsuariosService) { }
+  constructor(
+    private router:Router,
+    private usuariosService:UsuariosService,
+    private alertController: AlertController,
+    private modalController: ModalController,
+    private http: HttpClient) {     
+      var a = localStorage.getItem('token')
+  }
 
   usersArray = []
-  users:UserEntity;
+  usuario:UserEntity;
 
   ngOnInit() {
     this.reload();
@@ -32,6 +42,10 @@ export class UsuariosPage implements OnInit {
       () => {
           console.log("The POST observable is now completed.");
       });
+  }
+
+  delete(usuario){
+    this.usuariosService.deleteUsuario(usuario);
   }
 
   modificar(usuario){

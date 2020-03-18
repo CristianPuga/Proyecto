@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
+import { LoginService } from '../login/services/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements HttpInterceptor {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private loginService: LoginService){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   
@@ -23,19 +24,29 @@ export class AuthService implements HttpInterceptor {
       });
     }
 
-    return next.handle(request)/*.pipe(
-      catchError((err: HttpErrorResponse) => {
-
-        if (err.status === 401) {
-          this.router.navigateByUrl('/login');
-        }
-
-        return throwError( err );
-
-      })
-    );*/
+    return next.handle(request)
   }
 }
+
+
+
+
+
+
+ /* intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // add authorization header with jwt token if available
+    let currentUser = this.loginService.currentUserValue;
+    if (currentUser && currentUser.token) {
+        request = request.clone({
+            setHeaders: {
+                Authorization: `Bearer ${currentUser.token}`
+            }
+        });
+    }
+
+    return next.handle(request);
+}*/
+
 
 
 
