@@ -78,6 +78,7 @@ namespace GestampPrueba2.Controllers
         // POST: api/Usuarios2
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<Usuarios2>> PostUsuarios2([FromBody] Usuarios2 usuarios2)
         {

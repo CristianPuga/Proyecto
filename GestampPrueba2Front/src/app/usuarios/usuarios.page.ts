@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,19 +14,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsuariosPage implements OnInit {
 
+  //isLoggedIn$: Observable<boolean>;
+
   constructor(
     private router:Router,
     private usuariosService:UsuariosService,
-    private alertController: AlertController,
-    private modalController: ModalController,
-    private http: HttpClient) {     
-      var a = localStorage.getItem('token')
-  }
+    private http: HttpClient) {}
 
   usersArray = []
   usuario:UserEntity;
 
   ngOnInit() {
+    //this.isLoggedIn$ = this.authService.isLoggedIn;
     this.reload();
   }
 
@@ -72,6 +72,7 @@ export class UsuariosPage implements OnInit {
   }
 
   logOut() {
+    //this.authService.logout();
     localStorage.removeItem('token');
     this.router.navigate(['login']);
   }

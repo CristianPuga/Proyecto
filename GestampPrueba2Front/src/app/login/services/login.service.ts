@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
+/*  private loggedIn = new BehaviorSubject<boolean>(false);
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
+  }*/
 
   uri = 'http://localhost:5000/api';
   token;
@@ -21,11 +27,17 @@ export class LoginService {
     })
   }; 
 
-  isLogged(){
+
+   isLogged(){
     if(!localStorage.getItem("token")){
       return false;
     }else{
       return true;
     }
   }
+
+  /*logout() {
+    this.loggedIn.next(false);
+    this.router.navigate(['/login']);
+  }*/
 }
