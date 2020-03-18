@@ -14,6 +14,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GestampPrueba2.Controllers
 {
+    /// <summary>
+    /// Ruta de acceso al controlador
+    /// </summary>
+    /// <remarks>
+    /// Esta es la ruta por la que accedemos a este controlador
+    /// Esto nos servira para hacer las llamadas al backend desde nuestro cliente
+    /// </remarks>
     [Route("api/[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
@@ -26,14 +33,18 @@ namespace GestampPrueba2.Controllers
             _configuration = config;
             _context = context;
         }
-
+        /// <summary>
+        /// Metodo de validacion de usuario
+        /// </summary>
+        /// <param name="_userData"></param>
+        /// <returns>Devuelve un token unico por usuario</returns>
         [HttpPost]
         public async Task<IActionResult> Post(Usuarios2 _userData)
         {
             Console.WriteLine("Estoy dentro");
             Console.WriteLine(_userData.NombreUsuario);
             Console.WriteLine(_userData.Contrasena);
-
+            
             if (_userData != null && _userData.NombreUsuario != null && _userData.Contrasena != null)
             {
                 var user = await GetUser(_userData.NombreUsuario, _userData.Contrasena);
@@ -78,6 +89,12 @@ namespace GestampPrueba2.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodo para comprobar al usuario con la base de datos
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="contrasena"></param>
+        /// <returns>Devuelve a un usuario si lo encuentra en nuestra base de datos</returns>
         private async Task<Usuarios2> GetUser(string usuario, string contrasena)
         {
             return await _context.Usuarios2.FirstOrDefaultAsync(u => u.NombreUsuario == usuario && u.Contrasena == contrasena);

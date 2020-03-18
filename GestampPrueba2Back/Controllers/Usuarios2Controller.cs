@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GestampPrueba2.Controllers
 {
+    /// <summary>
+    /// Crud basico para usuarios
+    /// </summary>
     [Authorize]
     [Route("/usuarios")]
     //[ApiController]
@@ -23,6 +26,10 @@ namespace GestampPrueba2.Controllers
         }
 
         // GET: api/Usuarios2
+        /// <summary>
+        /// Metodo para buscar usuarios en una base de datos
+        /// </summary>
+        /// <returns>Devuelve un listado de usuarios</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuarios2>>> GetUsuarios2()
         {
@@ -30,6 +37,11 @@ namespace GestampPrueba2.Controllers
         }
 
         // GET: api/Usuarios2/5
+        /// <summary>
+        /// Busca un usuario por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
         {
@@ -46,6 +58,12 @@ namespace GestampPrueba2.Controllers
         // PUT: api/Usuarios2/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Modifica a un usuario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="usuarios2"></param>
+        /// <returns>Devuelve al usuario modificado</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuarios2(int id, [FromBody] Usuarios2 usuarios2)
         {
@@ -78,6 +96,11 @@ namespace GestampPrueba2.Controllers
         // POST: api/Usuarios2
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Añade un usuario a la base de datos
+        /// </summary>
+        /// <param name="usuarios2"></param>
+        /// <returns>Devuelve al usuario que se ha introducido</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<Usuarios2>> PostUsuarios2([FromBody] Usuarios2 usuarios2)
@@ -89,6 +112,11 @@ namespace GestampPrueba2.Controllers
         }
 
         // DELETE: api/Usuarios2/5
+        /// <summary>
+        /// Borra  aun usuario por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Devuelve al usuario borrado</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
         {
