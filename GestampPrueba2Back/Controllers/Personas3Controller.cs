@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GestampPrueba2.Controllers
 {
+    /// <summary>
+    /// Crud basico para usuarios
+    /// </summary>
     [Authorize]
     [Route("/personas")]
     //[ApiController]
@@ -23,6 +26,10 @@ namespace GestampPrueba2.Controllers
         }
 
         // GET: api/Personas3
+        /// <summary>
+        /// Busca personas en una base de datos
+        /// </summary>
+        /// <returns>Devuelve un listado de personas</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Personas3>>> GetPersonas3()
         {
@@ -30,6 +37,11 @@ namespace GestampPrueba2.Controllers
         }
 
         // GET: api/Personas3/5
+        /// <summary>
+        /// Busca una persona por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Devuelve a la persona que coincida con el id que se le pasa por parametro</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Personas3>> GetPersonas3(int id)
         {
@@ -46,6 +58,12 @@ namespace GestampPrueba2.Controllers
         // PUT: api/Personas3/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Modifica a una persona
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="personas3"></param>
+        /// <returns>Devuelve a la persona modificada</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPersonas3(int id, [FromBody] Personas3 personas3)
         {
@@ -78,6 +96,11 @@ namespace GestampPrueba2.Controllers
         // POST: api/Personas3
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        /// <summary>
+        /// Añade a una persona a la base de datos
+        /// </summary>
+        /// <param name="personas3"></param>
+        /// <returns>Devuelve a la persona que se ha introducido</returns>
         [HttpPost]
         public async Task<ActionResult<Personas3>> PostPersonas3([FromBody] Personas3 personas3)
         {
@@ -88,6 +111,11 @@ namespace GestampPrueba2.Controllers
         }
 
         // DELETE: api/Personas3/5
+        /// <summary>
+        /// Borra a una persona por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Devuelve a la persona borrada</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<Personas3>> DeletePersonas3(int id)
         {

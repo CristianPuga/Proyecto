@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 using System.IO;
 using Microsoft.OpenApi.Models;
+using GestampPrueba2.Infrastructure;
 
 namespace GestampPrueba2
 {
@@ -74,6 +75,9 @@ namespace GestampPrueba2
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+
+            // configure DI for application services
+            services.AddTransient<ITokenRepository, TokenRepository>();
 
             services.AddControllers();
         }

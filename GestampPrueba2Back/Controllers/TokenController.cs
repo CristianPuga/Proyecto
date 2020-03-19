@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +28,14 @@ namespace GestampPrueba2.Controllers
     public class TokenController : ControllerBase
     {
         public IConfiguration _configuration;
+        private readonly ITokenRepository _TokenRepository;
         private readonly masterContext _context;
 
-        public TokenController(IConfiguration config, masterContext context)
+        public TokenController(ITokenRepository TokenRepository, IConfiguration Configuration, masterContext context)
         {
-            _configuration = config;
+            _TokenRepository = TokenRepository;
             _context = context;
+            _configuration = Configuration;
         }
         /// <summary>
         /// Metodo de validacion de usuario
@@ -50,14 +53,15 @@ namespace GestampPrueba2.Controllers
             
             if (_userData != null && _userData.NombreUsuario != null && _userData.Contrasena != null)
             {
-                var user = await GetUser(_userData.NombreUsuario, _userData.Contrasena);
-                Console.WriteLine(user);
+                var user = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
+                Console.WriteLine(user.NombreUsuario);
+                Console.WriteLine(user.Contrasena);
 
                 if (user != null)
                 {
                     //create claims details based on the user information
                     var claims = new[] {
-                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                   // new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim("Id", user.Id.ToString()),
@@ -90,17 +94,6 @@ namespace GestampPrueba2.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        /// <summary>
-        /// Metodo para comprobar al usuario con la base de datos
-        /// </summary>
-        /// <param name="usuario"></param>
-        /// <param name="contrasena"></param>
-        /// <returns>Devuelve a un usuario si lo encuentra en nuestra base de datos</returns>
-        private async Task<Usuarios2> GetUser(string usuario, string contrasena)
-        {
-            return await _context.Usuarios2.FirstOrDefaultAsync(u => u.NombreUsuario == usuario && u.Contrasena == contrasena);
         }
     }
 }
