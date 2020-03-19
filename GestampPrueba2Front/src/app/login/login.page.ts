@@ -14,9 +14,28 @@ export class LoginPage implements OnInit {
   constructor(private router:Router,private http:HttpClient, private loginService:LoginService) {     var a = localStorage.getItem('token')
 }
   ngOnInit() {
+    if (localStorage.getItem('token')){
+      console.log("Usuario logeado");
+      this.router.navigate(['/usuarios'])
+      return true;
+    }else{
+      console.log("Usuario no logueado");     
+      return false;
+    }
   }
 
   login(form){
     this.loginService.login(form);
   }
+
+  /*ngDoCheck(){
+    if (localStorage.getItem('token')){
+      console.log("Usuario logeado");
+      //this.router.navigate(['/usuarios'])
+      return true;
+    }else{
+      console.log("Usuario no logueado");     
+      return false;
+    }
+  }*/
 }

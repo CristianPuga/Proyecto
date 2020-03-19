@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalPageModule } from './modal/modal.module';
 import { AuthService } from './auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { AuthService } from './auth/auth.service';
     HttpClientModule,
     NgxDatatableModule,
     ModalPageModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

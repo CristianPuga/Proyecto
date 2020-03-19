@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.Swagger.Annotations;
 
 namespace GestampPrueba2.Controllers
 {
@@ -38,6 +39,8 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <param name="_userData"></param>
         /// <returns>Devuelve un token unico por usuario</returns>
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
+        [SwaggerResponse(StatusCodes.Status401Unauthorized, Type = typeof(UnauthorizedResult))]
         [HttpPost]
         public async Task<IActionResult> Post(Usuarios2 _userData)
         {

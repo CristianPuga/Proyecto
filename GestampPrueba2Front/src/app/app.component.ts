@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -32,7 +32,8 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public menuCtrl: MenuController
   ) {
     this.initializeApp();
   }
@@ -49,5 +50,30 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  /*ngDoCheck(){
+    if (localStorage.getItem('token')){
+      console.log("Usuario logeado");
+      return true;
+    }else{
+      console.log("Usuario no logueado");     
+      return false;
+    }
+  }*/
+
+  enableAuthenticatedMenu() {
+    this.menuCtrl.enable(true, 'first');
+    this.menuCtrl.enable(false, 'first');
+  }
+
+  openMenu() {
+    this.menuCtrl.open('first');
+  }
+ 
+  closeMenu() {
+    console.log("he entrado");
+    
+    this.menuCtrl.close('first');
   }
 }

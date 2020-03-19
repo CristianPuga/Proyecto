@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { RegisterService } from './services/register.service';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,13 +9,27 @@ import { RegisterService } from './services/register.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private registerService:RegisterService) { }
+  form: FormGroup;
+
+  constructor(private registerService:RegisterService, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      nombreUsuario: ['', [Validators.required]],
+      contrasena: ['', [Validators.required, Validators.minLength(8)]],
+      email: ['', [Validators.required, Validators.email]],
+      img: ['']
+    });
+   }
 
   ngOnInit() {
   }
 
   register(form){
     console.log(form.value);
+    console.log(this.form.value)
+    if (this.form.valid){
     this.registerService.guardarUsuario(form); 
+    }else{
+      window.alert("Formulario no valido");
+    }
   }
 }

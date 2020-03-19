@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Authorization;
+using Swashbuckle.Swagger.Annotations;
 
 namespace GestampPrueba2.Controllers
 {
@@ -31,6 +32,8 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <returns>Devuelve un listado de usuarios</returns>
         [HttpGet]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<Usuarios2>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
         public async Task<ActionResult<IEnumerable<Usuarios2>>> GetUsuarios2()
         {
             return await _context.Usuarios2.ToListAsync();
@@ -43,6 +46,8 @@ namespace GestampPrueba2.Controllers
         /// <param name="id"></param>
         /// <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
         [HttpGet("{id}")]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
         {
             var usuarios2 = await _context.Usuarios2.FindAsync(id);
@@ -65,6 +70,8 @@ namespace GestampPrueba2.Controllers
         /// <param name="usuarios2"></param>
         /// <returns>Devuelve al usuario modificado</returns>
         [HttpPut("{id}")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Updated Object", Type = typeof(NoContentResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<IActionResult> PutUsuarios2(int id, [FromBody] Usuarios2 usuarios2)
         {
             if (id != usuarios2.Id)
@@ -113,11 +120,13 @@ namespace GestampPrueba2.Controllers
 
         // DELETE: api/Usuarios2/5
         /// <summary>
-        /// Borra  aun usuario por id
+        /// Borra a un usuario por id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Devuelve al usuario borrado</returns>
         [HttpDelete("{id}")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Deleted Object", Type = typeof(NoContentResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
         {
             var usuarios2 = await _context.Usuarios2.FindAsync(id);
