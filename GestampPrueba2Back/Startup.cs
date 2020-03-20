@@ -47,7 +47,7 @@ namespace GestampPrueba2
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost")
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowAnyMethod();

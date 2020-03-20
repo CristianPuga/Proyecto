@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestampPrueba2</name>
+    </assembly>
+    <members>
+        <member name="T:GestampPrueba2.Controllers.Personas3Controller">
+            <summary>
+            Crud basico para usuarios
+            </summary>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Personas3Controller.GetPersonas3">
+            <summary>
+            Busca personas en una base de datos
+            </summary>
+            <returns>Devuelve un listado de personas</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Personas3Controller.GetPersonas3(System.Int32)">
+            <summary>
+            Busca una persona por id
+            </summary>
+            <param name="id"></param>
+            <returns>Devuelve a la persona que coincida con el id que se le pasa por parametro</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Personas3Controller.PutPersonas3(System.Int32,GestampPrueba2.Models.Personas3)">
+            <summary>
+            Modifica a una persona
+            </summary>
+            <param name="id"></param>
+            <param name="personas3"></param>
+            <returns>Devuelve a la persona modificada</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Personas3Controller.PostPersonas3(GestampPrueba2.Models.Personas3)">
+            <summary>
+            Añade a una persona a la base de datos
+            </summary>
+            <param name="personas3"></param>
+            <returns>Devuelve a la persona que se ha introducido</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Personas3Controller.DeletePersonas3(System.Int32)">
+            <summary>
+            Borra a una persona por id
+            </summary>
+            <param name="id"></param>
+            <returns>Devuelve a la persona borrada</returns>
+        </member>
+        <member name="T:GestampPrueba2.Controllers.TokenController">
+            <summary>
+            Ruta de acceso al controlador
+            </summary>
+            <remarks>
+            Esta es la ruta por la que accedemos a este controlador
+            Esto nos servira para hacer las llamadas al backend desde nuestro cliente
+            </remarks>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.TokenController.Post(GestampPrueba2.Models.Usuarios2)">
+            <summary>
+            Metodo de validacion de usuario
+            </summary>
+            <param name="_userData"></param>
+            <returns>Devuelve un token unico por usuario</returns>
+        </member>
+        <member name="T:GestampPrueba2.Controllers.Usuarios2Controller">
+            <summary>
+            Crud basico para usuarios
+            </summary>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.GetUsuarios2">
+            <summary>
+            Metodo para buscar usuarios en una base de datos
+            </summary>
+            <returns>Devuelve un listado de usuarios</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.GetUsuarios2(System.Int32)">
+            <summary>
+            Busca un usuario por id
+            </summary>
+            <param name="id"></param>
+            <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PutUsuarios2(System.Int32,GestampPrueba2.Models.Usuarios2)">
+            <summary>
+            Modifica a un usuario
+            </summary>
+            <param name="id"></param>
+            <param name="usuarios2"></param>
+            <returns>Devuelve al usuario modificado</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PostUsuarios2(GestampPrueba2.Models.Usuarios2)">
+            <summary>
+            Añade un usuario a la base de datos
+            </summary>
+            <param name="usuarios2"></param>
+            <returns>Devuelve al usuario que se ha introducido</returns>
+        </member>
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.DeleteUsuarios2(System.Int32)">
+            <summary>
+            Borra a un usuario por id
+            </summary>
+            <param name="id"></param>
+            <returns>Devuelve al usuario borrado</returns>
+        </member>
+    </members>
+</doc>

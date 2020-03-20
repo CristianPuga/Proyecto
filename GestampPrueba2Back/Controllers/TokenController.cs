@@ -50,7 +50,12 @@ namespace GestampPrueba2.Controllers
             Console.WriteLine("Estoy dentro");
             Console.WriteLine(_userData.NombreUsuario);
             Console.WriteLine(_userData.Contrasena);
-            
+
+            var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
+            if (prueba == null)
+                return Unauthorized(new { message = "Username or password is incorrect" });
+
+
             if (_userData != null && _userData.NombreUsuario != null && _userData.Contrasena != null)
             {
                 var user = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
@@ -61,7 +66,7 @@ namespace GestampPrueba2.Controllers
                 {
                     //create claims details based on the user information
                     var claims = new[] {
-                   // new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim("Id", user.Id.ToString()),

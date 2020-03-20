@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestampPrueba2", "GestampPrueba2.csproj", "{28B32099-CE64-48DA-B0C3-4DD8DB6AFF36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestampPrueba2", "GestampPrueba2.csproj", "{28B32099-CE64-48DA-B0C3-4DD8DB6AFF36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestmapPrueba2.Test", "..\GestmapPrueba2.Test\GestmapPrueba2.Test.csproj", "{3573EDA9-E49C-416D-9966-7274B1E9BA0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{28B32099-CE64-48DA-B0C3-4DD8DB6AFF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28B32099-CE64-48DA-B0C3-4DD8DB6AFF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28B32099-CE64-48DA-B0C3-4DD8DB6AFF36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3573EDA9-E49C-416D-9966-7274B1E9BA0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3573EDA9-E49C-416D-9966-7274B1E9BA0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3573EDA9-E49C-416D-9966-7274B1E9BA0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3573EDA9-E49C-416D-9966-7274B1E9BA0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
