@@ -10,12 +10,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GestampPrueba2.Controllers
 {
-    /// <summary>
-    /// Crud basico para usuarios
-    /// </summary>
+
     [Authorize]
+    [ApiVersion("1.0")]
     [Route("/personas")]
-    //[ApiController]
     public class Personas3Controller : ControllerBase
     {
         private readonly masterContext _context;

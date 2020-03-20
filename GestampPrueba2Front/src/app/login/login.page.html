@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button *ngIf="identificado" autoHide="false"></ion-menu-button>
     </ion-buttons>
-    <ion-title>Login</ion-title>
+    <ion-title><img class="rounded mx-auto d-block" class="img-fluid" style="height: 200px"  alt="GESTAMP"src="https://cep-plasticos.com/sites/default/files/images/Logo%20Gestamp%202012%20Alta.jpg"></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,13 +29,9 @@
           </div>
           <div padding class="form-group">
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            <a routerLink='/register'><ion-button size="large" expand="block">Resgistrarse</ion-button></a>
           </div>
         </ion-col>
-      </ion-row>
-      <ion-row justify-content-center>
-        <div>
-        ¡Si no tienes una cuenta <a routerLink='/register'>registrate</a> primero!
-        </div>
       </ion-row>
     </ion-grid>
   </form>

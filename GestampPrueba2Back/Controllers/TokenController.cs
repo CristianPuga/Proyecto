@@ -16,15 +16,9 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace GestampPrueba2.Controllers
 {
-    /// <summary>
-    /// Ruta de acceso al controlador
-    /// </summary>
-    /// <remarks>
-    /// Esta es la ruta por la que accedemos a este controlador
-    /// Esto nos servira para hacer las llamadas al backend desde nuestro cliente
-    /// </remarks>
+   // [ApiController]
+    //[ApiVersion("2.0")]
     [Route("api/[controller]")]
-    [ApiController]
     public class TokenController : ControllerBase
     {
         public IConfiguration _configuration;
@@ -45,7 +39,7 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Type = typeof(UnauthorizedResult))]
         [HttpPost]
-        public async Task<IActionResult> Post(Usuarios2 _userData)
+        public async Task<IActionResult> Post([FromBody] Usuarios2 _userData)
         {
             Console.WriteLine("Estoy dentro");
             Console.WriteLine(_userData.NombreUsuario);

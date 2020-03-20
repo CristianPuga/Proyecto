@@ -4,11 +4,6 @@
         <name>GestampPrueba2</name>
     </assembly>
     <members>
-        <member name="T:GestampPrueba2.Controllers.Personas3Controller">
-            <summary>
-            Crud basico para usuarios
-            </summary>
-        </member>
         <member name="M:GestampPrueba2.Controllers.Personas3Controller.GetPersonas3">
             <summary>
             Busca personas en una base de datos
@@ -44,26 +39,12 @@
             <param name="id"></param>
             <returns>Devuelve a la persona borrada</returns>
         </member>
-        <member name="T:GestampPrueba2.Controllers.TokenController">
-            <summary>
-            Ruta de acceso al controlador
-            </summary>
-            <remarks>
-            Esta es la ruta por la que accedemos a este controlador
-            Esto nos servira para hacer las llamadas al backend desde nuestro cliente
-            </remarks>
-        </member>
         <member name="M:GestampPrueba2.Controllers.TokenController.Post(GestampPrueba2.Models.Usuarios2)">
             <summary>
             Metodo de validacion de usuario
             </summary>
             <param name="_userData"></param>
             <returns>Devuelve un token unico por usuario</returns>
-        </member>
-        <member name="T:GestampPrueba2.Controllers.Usuarios2Controller">
-            <summary>
-            Crud basico para usuarios
-            </summary>
         </member>
         <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.GetUsuarios2">
             <summary>

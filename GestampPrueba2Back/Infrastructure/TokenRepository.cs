@@ -20,6 +20,7 @@ namespace GestampPrueba2.Infrastructure
             try
             {
                 var user = await _context.Usuarios2.FirstOrDefaultAsync(u => u.NombreUsuario == usuario && u.Contrasena == contrasena);
+                Console.WriteLine(user);
                 return user;
             }
             catch (Exception ex)

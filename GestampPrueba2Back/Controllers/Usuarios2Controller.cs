@@ -11,12 +11,10 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace GestampPrueba2.Controllers
 {
-    /// <summary>
-    /// Crud basico para usuarios
-    /// </summary>
+
     [Authorize]
+    [ApiVersion("2.0")]
     [Route("/usuarios")]
-    //[ApiController]
     public class Usuarios2Controller : ControllerBase
     {
         private readonly masterContext _context;

@@ -1,26 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
 using GestampPrueba2.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Reflection;
-using System.IO;
 using Microsoft.OpenApi.Models;
 using GestampPrueba2.Infrastructure;
+using System.Collections.Generic;
+using System.Reflection;
+using System.IO;
+using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace GestampPrueba2
 {
@@ -56,7 +51,8 @@ namespace GestampPrueba2
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("api", new OpenApiInfo { Title = "Gestamp API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gestamp API", Version = "v1" });
+                //c.EnableAnnotations();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -74,6 +70,14 @@ namespace GestampPrueba2
                     ValidIssuer = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
+            });
+
+           services.AddApiVersioning(options => {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                   var multiVersionReader = new HeaderApiVersionReader("api-version");
+                   options.ApiVersionReader = multiVersionReader;
+                   options.DefaultApiVersion = new ApiVersion(1, 0);
             });
 
             // configure DI for application services
@@ -94,7 +98,7 @@ namespace GestampPrueba2
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/api/swagger.json", "Gestamp Api v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gestamp Api v1");
                 c.RoutePrefix = string.Empty;
             });
 
