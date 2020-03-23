@@ -41,18 +41,23 @@ namespace GestampPrueba2.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Usuarios2 _userData)
         {
-            Console.WriteLine("Estoy dentro");
+            Console.WriteLine("Estoy dentro esto es TokenController ver que le llega");
             Console.WriteLine(_userData.NombreUsuario);
             Console.WriteLine(_userData.Contrasena);
+            Console.WriteLine("Fin de TokenController");
 
             var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
             if (prueba == null)
-                return Unauthorized(new { message = "Username or password is incorrect" });
-
+            {
+                Console.WriteLine("COmprobando");
+                return NotFound();
+                //return Unauthorized(new { message = "Username or password is incorrect" });
+            }
 
             if (_userData != null && _userData.NombreUsuario != null && _userData.Contrasena != null)
             {
                 var user = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
+                Console.WriteLine("Estoy dentro esto es TokenController metodo que llama al repo");
                 Console.WriteLine(user.NombreUsuario);
                 Console.WriteLine(user.Contrasena);
 
@@ -80,9 +85,8 @@ namespace GestampPrueba2.Controllers
                     return Ok(new
                     {
                         token = new JwtSecurityTokenHandler().WriteToken(token)
+
                     });
-
-
                 }
                 else
                 {
