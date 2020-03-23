@@ -29,6 +29,8 @@ namespace GestampPrueba2.Controllers
         /// Metodo para buscar usuarios en una base de datos
         /// </summary>
         /// <returns>Devuelve un listado de usuarios</returns>
+        /// 
+        //[AllowAnonymous]
         [HttpGet]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<Usuarios2>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
@@ -43,6 +45,7 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
+        //[AllowAnonymous]
         [HttpGet("{id}")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]

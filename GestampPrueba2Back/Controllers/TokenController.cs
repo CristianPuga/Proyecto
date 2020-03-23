@@ -36,16 +36,11 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <param name="_userData"></param>
         /// <returns>Devuelve un token unico por usuario</returns>
+        [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Type = typeof(UnauthorizedResult))]
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Usuarios2 _userData)
+        public async Task<ActionResult<Usuarios2>> Post([FromBody] Usuarios2 _userData)
         {
-            Console.WriteLine("Estoy dentro esto es TokenController ver que le llega");
-            Console.WriteLine(_userData.NombreUsuario);
-            Console.WriteLine(_userData.Contrasena);
-            Console.WriteLine("Fin de TokenController");
-
             var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
             if (prueba == null)
             {
@@ -71,15 +66,13 @@ namespace GestampPrueba2.Controllers
                     new Claim("Id", user.Id.ToString()),
                     new Claim("NombreUsuario", user.NombreUsuario),
                     new Claim("Email", user.Email)
-                  //  new Claim("UserName", user.UserName),
-                  //  new Claim("Email", user.Email)
                    };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
 
                     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
+                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);             
 
                     Console.WriteLine("Usuario Correcto, generando token...");
                     return Ok(new

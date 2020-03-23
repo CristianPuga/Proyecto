@@ -51,6 +51,7 @@
             Metodo para buscar usuarios en una base de datos
             </summary>
             <returns>Devuelve un listado de usuarios</returns>
+            
         </member>
         <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.GetUsuarios2(System.Int32)">
             <summary>

@@ -37,11 +37,10 @@ namespace GestmapPrueba2.Test
             Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
             // Act
             var result = await response.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<Usuarios2>(result);
-            Assert.NotNull(result);
+            var user = JsonConvert.DeserializeObject<Prueba>(result);
+            Assert.NotNull(user.Token);
 
         }
-
 
 
         [Fact]
@@ -58,10 +57,7 @@ namespace GestmapPrueba2.Test
             HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/token", new StringContent(data.ToString(), Encoding.UTF8, "application/json"));
             // Act
 
-            Assert.Equal((int)HttpStatusCode.Unauthorized, (int)response.StatusCode);
-
-
-
+            Assert.Equal((int)HttpStatusCode.NotFound, (int)response.StatusCode);
         }
-    }
+  }
 }

@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { UsuariosPageRoutingModule } from './usuarios-routing.module';
 
 import { UsuariosPage } from './usuarios.page';
+import {SplitButtonModule} from 'primeng/splitbutton';
+import {ToolbarModule} from 'primeng/toolbar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UsuariosPageRoutingModule
+    UsuariosPageRoutingModule,
+    SplitButtonModule,
+    ToolbarModule
   ],
   declarations: [UsuariosPage]
 })
