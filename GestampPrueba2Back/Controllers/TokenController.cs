@@ -44,7 +44,7 @@ namespace GestampPrueba2.Controllers
             var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
             if (prueba == null)
             {
-                Console.WriteLine("COmprobando");
+                Console.WriteLine("Comprobando");
                 return NotFound();
                 //return Unauthorized(new { message = "Username or password is incorrect" });
             }

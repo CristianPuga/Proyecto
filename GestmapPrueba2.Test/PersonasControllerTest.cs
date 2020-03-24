@@ -46,13 +46,6 @@ namespace GestmapPrueba2.Test
         public async Task GetPersona_HigherThan()
         {
             int age = 60;
-            HttpResponseMessage response = await ExecuteHttpGetPersonas();
-
-            var a = _service.GetAllPersonas();
-            var result = await response.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<Personas3>(result);
-                Assert.Equal(age, user.Edad);
-
         }
 
 
@@ -72,13 +65,18 @@ namespace GestmapPrueba2.Test
 
         private async Task<HttpResponseMessage> ExecuteHttpGetPersonas()
         {
+            string token = await GetToken();
 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/personas");
             return response;
         }
 
         private async Task<HttpResponseMessage> ExecuteHttpGetPersonasById(int id)
         {
+            string token = await GetToken();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/personas/{id}");
             return response;

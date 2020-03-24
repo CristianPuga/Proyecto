@@ -60,7 +60,7 @@ namespace GestmapPrueba2.Test
             string token = await GetToken();
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.GetAsync("http://localhost:5000/usuarios");
+            HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/usuarios");
             Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
         }
 
