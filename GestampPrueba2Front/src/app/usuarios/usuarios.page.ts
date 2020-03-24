@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserEntity } from '../models/user.entity';
 import { UsuariosService } from './services/usuarios.service';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -17,19 +17,21 @@ export class UsuariosPage implements OnInit {
   //isLoggedIn$: Observable<boolean>;
 
   cols: any[];
+  
+  usersArray = []
+  usuario:UserEntity;
+  selectedUser: UserEntity;
 
   constructor(
     private router:Router,
     private usuariosService:UsuariosService,
     private http: HttpClient) {}
 
-  usersArray = []
-  usuario:UserEntity;
-  selectedUser: UserEntity;
 
   ngOnInit() {
     //this.isLoggedIn$ = this.authService.isLoggedIn;
     this.reload();
+    this.usuario = new UserEntity();
 
     this.cols = [
       { field: 'id', header: 'Id' },
@@ -39,6 +41,22 @@ export class UsuariosPage implements OnInit {
       { field: 'img', header: 'Img' }
   ];
   }
+
+  display: boolean = false;
+
+    showDialog() {
+        this.display = true;
+    }
+
+    guardar(){
+      console.log(this.usuario);
+    try {
+      this.usuariosService.updateUsuario(this.usuario);
+      console.log("post done");
+      this.reload();
+    } catch (error) {
+    }  
+    }
 
   reload(){
        this.usuariosService.getUsuarios().subscribe(

@@ -10,6 +10,7 @@ import { UsuariosPage } from './usuarios.page';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {TableModule} from 'primeng/table';
     UsuariosPageRoutingModule,
     SplitButtonModule,
     ToolbarModule,
-    TableModule
+    TableModule,
+    DialogModule
   ],
   declarations: [UsuariosPage]
 })

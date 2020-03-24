@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using GestampPrueba2.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using GestampPrueba2.Infrastructure;
 
 namespace GestampPrueba2.Controllers
 {
@@ -17,10 +18,12 @@ namespace GestampPrueba2.Controllers
     public class Personas3Controller : ControllerBase
     {
         private readonly masterContext _context;
+        //private readonly IPersonasService personasService;
 
-        public Personas3Controller(masterContext context)
+        public Personas3Controller(masterContext context /*IPersonasService service*/)
         {
-            _context = context;
+             _context = context;
+           // personasService = service;
         }
 
         // GET: api/Personas3
@@ -32,8 +35,9 @@ namespace GestampPrueba2.Controllers
         public async Task<ActionResult<IEnumerable<Personas3>>> GetPersonas3()
         {
             return await _context.Personas3.ToListAsync();
-        }
 
+        }
+        
         // GET: api/Personas3/5
         /// <summary>
         /// Busca una persona por id
@@ -43,6 +47,7 @@ namespace GestampPrueba2.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Personas3>> GetPersonas3(int id)
         {
+            Console.WriteLine(id);
             var personas3 = await _context.Personas3.FindAsync(id);
 
             if (personas3 == null)
@@ -50,7 +55,7 @@ namespace GestampPrueba2.Controllers
                 return NotFound();
             }
 
-            return personas3;
+            return Ok(personas3);
         }
 
         // PUT: api/Personas3/5

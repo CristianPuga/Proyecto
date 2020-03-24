@@ -2,28 +2,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosService {
 
-  //private isUserLoggedIn;
 
-  constructor(private http:HttpClient, private alertController: AlertController) { 
-    //this.isUserLoggedIn = false;
-  }
+  usuario = {};
 
-/*
-  getUserLoggedIn(){
-    if (localStorage.getItem('token')){
-      this.isUserLoggedIn = true;
-    }else{
-      console.log("El usuario no esta logueado");
-      
-    }
-  }*/
-
+  constructor(private http:HttpClient, private alertController: AlertController, private router:Router) {}
 
   getUsuarios(): Observable<any>{
     console.log("Obteniendo usuarios....");
@@ -68,6 +57,31 @@ export class UsuariosService {
       await alert.present();
       }
     );
+  }
+
+  updateUsuario(usuario){
+    this.usuario = usuario;
+    console.log(usuario.id)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+
+    this.http.put('http://localhost:5000/usuarios/' + usuario.id,this.usuario, httpOptions).subscribe(
+      (val) => {
+          console.log("PUT call successful value returned in body");
+          console.log(val);
+      },
+      response => {
+          console.log("PUT call in error", response);
+          console.log(this.usuario)
+      },
+      () => {
+          console.log("The PUT observable is now completed.");
+          this.router.navigate(['/usuarios'])
+          window.location.reload();
+      });
   }
 
 }
