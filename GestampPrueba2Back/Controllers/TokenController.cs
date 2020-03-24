@@ -39,7 +39,7 @@ namespace GestampPrueba2.Controllers
         [HttpPost]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Type = typeof(UnauthorizedResult))]
-        public async Task<ActionResult<Usuarios2>> Post([FromBody] Usuarios2 _userData)
+        public async Task<ActionResult<string>> Post([FromBody] Usuarios2 _userData)
         {
             var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
             if (prueba == null)
@@ -72,7 +72,11 @@ namespace GestampPrueba2.Controllers
 
                     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);             
+                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
+
+                    var pruebas = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    Console.WriteLine(pruebas);
 
                     Console.WriteLine("Usuario Correcto, generando token...");
                     return Ok(new

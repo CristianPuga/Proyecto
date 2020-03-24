@@ -1,9 +1,6 @@
-﻿using GestampPrueba2.Controllers;
-using GestampPrueba2.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using GestampPrueba2.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -43,7 +40,7 @@ namespace GestmapPrueba2.Test
         }
 
 
-        [Fact]
+       [Fact]
         public async Task GetUsuariosId_WhenCalled_CorrectUser()
         {
             int id = 1;
@@ -61,6 +58,7 @@ namespace GestmapPrueba2.Test
         public async Task GetAllUsuarios_WhenCalled_With_Token()
         {
             string token = await GetToken();
+
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer ", token);
             HttpResponseMessage response = await client.GetAsync("http://localhost:5000/usuarios");
             Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
@@ -76,7 +74,7 @@ namespace GestmapPrueba2.Test
         }
 
         [Fact]
-        private async Task<string> GetToken()
+        public async Task<string> GetToken()
         {
          var data = JsonConvert.SerializeObject(new
          {
@@ -84,7 +82,7 @@ namespace GestmapPrueba2.Test
            contrasena = "1234"
          });
 
-         HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/token", new StringContent(data.ToString(), Encoding.UTF8, "application/json"));
+         HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/token", new StringContent(data, Encoding.UTF8, "application/json"));
                                  
          var result = await response.Content.ReadAsStringAsync();
          var user = JsonConvert.DeserializeObject<Prueba>(result);

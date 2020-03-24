@@ -58,7 +58,7 @@ namespace GestampPrueba2.Controllers
                 return NotFound();
             }
 
-            return usuarios2;
+            return Ok(usuarios2);
         }
 
         // PUT: api/Usuarios2/5

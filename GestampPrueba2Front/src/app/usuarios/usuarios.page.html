@@ -26,7 +26,59 @@
         <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>
     </div>
 </p-toolbar>
-  <table class="table table-striped">
+
+<p-table #dt [columns]="cols" [loading]="loading" [lazy]="lazy" styleClass="ui-table-cars" [value]="usersArray" [paginator]="true" [rows]="10" dataKey="vin" selectionMode="single" [(selection)]="selectedUser">
+  <ng-template pTemplate="caption">
+      List of Users
+      <div class="ui-table-globalfilter-container">
+          <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:250px;">
+      </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th style="width: 8em"></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+          <td>{{rowData.id}}</td>
+          <td>{{rowData.nombreUsuario}}</td>
+          <td>{{rowData.contrasena}}</td>
+          <td><ion-toggle name="activo" color="light" [checked]="rowData.activo" (click)="modificar(rowData)"></ion-toggle></td>
+          <td>
+              <img src="{{rowData.img}}" style="width: 36px; margin-right: 1em; vertical-align: middle;">
+          </td>
+          <td>
+              <button pButton type="button" class="ui-button-success" icon="pi pi-search" style="margin-right: .5em"></button>
+              <button pButton type="button" (click)="delete(rowData)" class="ui-button-warning" icon="pi pi-pencil"></button>
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<table class="table table-striped">
     <thead>
       <tr class="ion-justify-content-center">
         <th>Id</th>
@@ -48,5 +100,5 @@
         <td><button type="button" class="btn btn-danger" (click)="delete(usuario)"> Borrar</button></td>
       </tr>
     </tbody>
-  </table>
+  </table>-->
 </ion-content>

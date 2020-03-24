@@ -9,6 +9,8 @@ import { UsuariosPageRoutingModule } from './usuarios-routing.module';
 import { UsuariosPage } from './usuarios.page';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {ToolbarModule} from 'primeng/toolbar';
+import {TableModule} from 'primeng/table';
+
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import {ToolbarModule} from 'primeng/toolbar';
     IonicModule,
     UsuariosPageRoutingModule,
     SplitButtonModule,
-    ToolbarModule
+    ToolbarModule,
+    TableModule
   ],
   declarations: [UsuariosPage]
 })

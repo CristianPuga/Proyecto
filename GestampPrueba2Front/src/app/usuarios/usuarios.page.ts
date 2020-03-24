@@ -16,6 +16,8 @@ export class UsuariosPage implements OnInit {
 
   //isLoggedIn$: Observable<boolean>;
 
+  cols: any[];
+
   constructor(
     private router:Router,
     private usuariosService:UsuariosService,
@@ -23,10 +25,19 @@ export class UsuariosPage implements OnInit {
 
   usersArray = []
   usuario:UserEntity;
+  selectedUser: UserEntity;
 
   ngOnInit() {
     //this.isLoggedIn$ = this.authService.isLoggedIn;
     this.reload();
+
+    this.cols = [
+      { field: 'id', header: 'Id' },
+      { field: 'nombreUsuario', header: 'Nombre Usuario' },
+      { field: 'contrasena', header: 'Contraseña' },
+      { field: 'activo', header: 'Inactivo/Activo' },
+      { field: 'img', header: 'Img' }
+  ];
   }
 
   reload(){

@@ -8,7 +8,6 @@ import { PersonasPageRoutingModule } from './personas-routing.module';
 
 import { PersonasPage } from './personas.page';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -16,7 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
     FormsModule,
     IonicModule,
     PersonasPageRoutingModule,
-    NgxDatatableModule,
+    NgxDatatableModule
   ],
   declarations: [PersonasPage]
 })

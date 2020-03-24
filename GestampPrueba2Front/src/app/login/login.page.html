@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <div>
   <form #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
@@ -28,11 +29,12 @@
             <label class="form-check-label" for="defaultCheck2">No mantener sesion iniciada</label>
           </div>
           <div padding class="form-group">
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
-            <a routerLink='/register'><ion-button size="large" expand="block">Resgistrarse</ion-button></a>
+            <ion-button pButton size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            <a routerLink='/register'><ion-button pButton size="large" expand="block">Resgistrarse</ion-button></a>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
+  </div>
 </ion-content>
