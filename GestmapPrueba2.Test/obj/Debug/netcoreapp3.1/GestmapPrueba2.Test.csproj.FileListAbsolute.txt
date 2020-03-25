@@ -253,3 +253,9 @@ C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netco
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.pdb
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\Moq.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Application.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Infrastructure.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Models.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Application.pdb
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Infrastructure.pdb
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\GestampPrueba.Models.pdb

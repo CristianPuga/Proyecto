@@ -6,6 +6,7 @@ import { AlertController, ModalController, NavParams } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ModalUsersPage } from '../modal-users/modal-users.page';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,8 +14,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./usuarios.page.scss'],
 })
 export class UsuariosPage implements OnInit {
-
-  //isLoggedIn$: Observable<boolean>;
 
   cols: any[];
   
@@ -25,13 +24,16 @@ export class UsuariosPage implements OnInit {
   constructor(
     private router:Router,
     private usuariosService:UsuariosService,
-    private http: HttpClient) {}
+    private http: HttpClient,
+    private modalController: ModalController) {
+      this.reload();
+    }
 
 
   ngOnInit() {
-    //this.isLoggedIn$ = this.authService.isLoggedIn;
-    this.reload();
     this.usuario = new UserEntity();
+    this.reload();
+   
 
     this.cols = [
       { field: 'id', header: 'Id' },
@@ -45,17 +47,29 @@ export class UsuariosPage implements OnInit {
   display: boolean = false;
 
     showDialog() {
-        this.display = true;
+      this.display = true;
     }
+
+    showModalUser(usuario){
+      this.presentModal2(usuario);
+    }
+
+    async presentModal2(usuario) {      
+      console.log(usuario)
+      const modal2 = await this.modalController.create({
+       component: ModalUsersPage,
+       componentProps: {
+         'usuario': usuario,
+       }
+     
+     });
+     return await modal2.present();
+   }
 
     guardar(){
       console.log(this.usuario);
-    try {
       this.usuariosService.updateUsuario(this.usuario);
-      console.log("post done");
-      this.reload();
-    } catch (error) {
-    }  
+      
     }
 
   reload(){

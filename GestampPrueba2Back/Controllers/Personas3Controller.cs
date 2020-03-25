@@ -12,18 +12,16 @@ using GestampPrueba2.Infrastructure;
 namespace GestampPrueba2.Controllers
 {
 
-    [Authorize]
+    //[Authorize]
     [ApiVersion("1.0")]
     [Route("/personas")]
     public class Personas3Controller : ControllerBase
     {
-        private readonly masterContext _context;
-        //private readonly IPersonasService personasService;
+        private readonly IPersonasService personasService;
 
-        public Personas3Controller(masterContext context /*IPersonasService service*/)
-        {
-             _context = context;
-           // personasService = service;
+        public Personas3Controller(IPersonasService service)
+        { 
+            personasService = service;
         }
 
         // GET: api/Personas3
@@ -34,7 +32,7 @@ namespace GestampPrueba2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Personas3>>> GetPersonas3()
         {
-            return await _context.Personas3.ToListAsync();
+            return await personasService.GetAllPersonas();
 
         }
         
@@ -47,17 +45,15 @@ namespace GestampPrueba2.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Personas3>> GetPersonas3(int id)
         {
-            Console.WriteLine(id);
-            var personas3 = await _context.Personas3.FindAsync(id);
+            var personas3 = await personasService.GetById(id);
 
             if (personas3 == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(personas3);
+                {
+                    return NotFound();
+                }
+            return await personasService.GetById(id);
         }
-
+       
         // PUT: api/Personas3/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -68,32 +64,9 @@ namespace GestampPrueba2.Controllers
         /// <param name="personas3"></param>
         /// <returns>Devuelve a la persona modificada</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonas3(int id, [FromBody] Personas3 personas3)
+        public async Task<ActionResult<Personas3>> PutPersonas3(int id, [FromBody] Personas3 personas3)
         {
-            if (id != personas3.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(personas3).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!Personas3Exists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return await personasService.PutPersonas3(id, personas3);
         }
 
         // POST: api/Personas3
@@ -105,14 +78,16 @@ namespace GestampPrueba2.Controllers
         /// <param name="personas3"></param>
         /// <returns>Devuelve a la persona que se ha introducido</returns>
         [HttpPost]
-        public async Task<ActionResult<Personas3>> PostPersonas3([FromBody] Personas3 personas3)
+        public Task<ActionResult<Personas3>> PostPersonas3([FromBody] Personas3 personas3)
         {
-            _context.Personas3.Add(personas3);
+
+            return personasService.PostPersonas3(personas3);
+            /*_context.Personas3.Add(personas3);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPersonas3", new { id = personas3.Id }, personas3);
+            return CreatedAtAction("GetPersonas3", new { id = personas3.Id }, personas3);*/
         }
-
+        
         // DELETE: api/Personas3/5
         /// <summary>
         /// Borra a una persona por id
@@ -122,21 +97,7 @@ namespace GestampPrueba2.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Personas3>> DeletePersonas3(int id)
         {
-            var personas3 = await _context.Personas3.FindAsync(id);
-            if (personas3 == null)
-            {
-                return NotFound();
-            }
-
-            _context.Personas3.Remove(personas3);
-            await _context.SaveChangesAsync();
-
-            return personas3;
-        }
-
-        private bool Personas3Exists(int id)
-        {
-            return _context.Personas3.Any(e => e.Id == id);
+            return await personasService.DeletePersona(id);
         }
     }
 }

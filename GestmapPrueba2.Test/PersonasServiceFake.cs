@@ -1,9 +1,11 @@
 ﻿using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GestmapPrueba2.Test
 {
@@ -21,19 +23,19 @@ namespace GestmapPrueba2.Test
             };
         }
 
-        public IEnumerable<Personas3> GetAllPersonas()
+        public IEnumerable<Personas3> GetAllPersona()
         {
             return _personas;
         }
 
-        public Personas3 PostPersonas3(Personas3 newPersona)
+        public Task<ActionResult<Personas3>> PostPersonas3(Personas3 newPersona)
         {
-            newPersona.Id = 20;
+           newPersona.Id = 78;
             _personas.Add(newPersona);
             return newPersona;
         }
 
-        public  Personas3 GetById(int id)
+        public  Task<ActionResult<Personas3>> GetById(int id)
         {
                 return _personas.Where(a => a.Id == id)
                     .FirstOrDefault();

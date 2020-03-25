@@ -8,20 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
+using GestampPrueba.Application;
 
 namespace GestampPrueba2.Controllers
 {
 
-    [Authorize]
+    //[Authorize]
     [ApiVersion("2.0")]
     [Route("/usuarios")]
     public class Usuarios2Controller : ControllerBase
     {
-        private readonly masterContext _context;
+        private readonly IUsuariosService usuariosService;
 
-        public Usuarios2Controller(masterContext context)
+
+        public Usuarios2Controller(IUsuariosService service)
         {
-            _context = context;
+            usuariosService = service;
         }
 
         // GET: api/Usuarios2
@@ -36,7 +38,8 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
         public async Task<ActionResult<IEnumerable<Usuarios2>>> GetUsuarios2()
         {
-            return await _context.Usuarios2.ToListAsync();
+            return await usuariosService.GetAllUsuarios();
+            //return await _context.Usuarios2.ToListAsync();
         }
 
         // GET: api/Usuarios2/5
@@ -51,14 +54,22 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
         {
-            var usuarios2 = await _context.Usuarios2.FindAsync(id);
+
+            var usuarios2 = await usuariosService.GetById(id);
+
+            if (usuarios2 == null)
+            {
+                return NotFound();
+            }
+            return await usuariosService.GetById(id);
+            /*var usuarios2 = await _context.Usuarios2.FindAsync(id);
 
             if (usuarios2 == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuarios2);
+            return Ok(usuarios2);*/
         }
 
         // PUT: api/Usuarios2/5
@@ -73,8 +84,11 @@ namespace GestampPrueba2.Controllers
         [HttpPut("{id}")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Updated Object", Type = typeof(NoContentResult))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
-        public async Task<IActionResult> PutUsuarios2(int id, [FromBody] Usuarios2 usuarios2)
+        public async Task<ActionResult<Usuarios2>> PutUsuarios2(int id, [FromBody] Usuarios2 usuarios2)
         {
+            return await usuariosService.PutUsuario2(id, usuarios2);
+
+            /*Console.WriteLine(usuarios2);
             if (id != usuarios2.Id)
             {
                 return BadRequest();
@@ -98,7 +112,7 @@ namespace GestampPrueba2.Controllers
                 }
             }
 
-            return NoContent();
+            return NoContent();*/
         }
 
         // POST: api/Usuarios2
@@ -111,12 +125,14 @@ namespace GestampPrueba2.Controllers
         /// <returns>Devuelve al usuario que se ha introducido</returns>
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<Usuarios2>> PostUsuarios2([FromBody] Usuarios2 usuarios2)
+        public Task<ActionResult<Usuarios2>> PostUsuarios2([FromBody] Usuarios2 usuarios2)
         {
-            _context.Usuarios2.Add(usuarios2);
-            await _context.SaveChangesAsync();
+            return usuariosService.PostUsuarios2(usuarios2);
 
-            return CreatedAtAction("GetUsuarios2", new { id = usuarios2.Id }, usuarios2);
+            /* _context.Usuarios2.Add(usuarios2);
+             await _context.SaveChangesAsync();
+
+             return CreatedAtAction("GetUsuarios2", new { id = usuarios2.Id }, usuarios2);*/
         }
 
         // DELETE: api/Usuarios2/5
@@ -130,7 +146,10 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
         {
-            var usuarios2 = await _context.Usuarios2.FindAsync(id);
+
+            return await usuariosService.DeleteUsuario(id);
+
+            /*var usuarios2 = await _context.Usuarios2.FindAsync(id);
             if (usuarios2 == null)
             {
                 return NotFound();
@@ -139,12 +158,8 @@ namespace GestampPrueba2.Controllers
             _context.Usuarios2.Remove(usuarios2);
             await _context.SaveChangesAsync();
 
-            return usuarios2;
+            return usuarios2;*/
         }
 
-        private bool Usuarios2Exists(int id)
-        {
-            return _context.Usuarios2.Any(e => e.Id == id);
-        }
     }
 }

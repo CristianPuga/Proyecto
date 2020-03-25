@@ -29,7 +29,11 @@ const routes: Routes = [
     path: 'usuarios',
     loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'modal-users',
+    loadChildren: () => import('./modal-users/modal-users.module').then( m => m.ModalUsersPageModule)
   }
+
 
 ];
 

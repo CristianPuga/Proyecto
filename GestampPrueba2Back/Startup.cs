@@ -16,6 +16,7 @@ using System.IO;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using GestampPrueba.Application;
 
 namespace GestampPrueba2
 {
@@ -83,6 +84,8 @@ namespace GestampPrueba2
             // configure DI for application services
             services.AddTransient<ITokenRepository, TokenRepository>();
             services.AddTransient<IPersonasService, PersonasServices>();
+            services.AddTransient<IUsuariosService, UsuariosService>();
+
 
 
             services.AddControllers();

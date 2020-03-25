@@ -41,6 +41,8 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Type = typeof(UnauthorizedResult))]
         public async Task<ActionResult<string>> Post([FromBody] Usuarios2 _userData)
         {
+            Console.WriteLine(_userData.NombreUsuario);
+            Console.WriteLine(_userData.Contrasena);
             var prueba = await _TokenRepository.Authenticate(_userData.NombreUsuario, _userData.Contrasena);
             if (prueba == null)
             {

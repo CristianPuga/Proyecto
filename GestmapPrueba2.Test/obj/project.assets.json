@@ -3932,11 +3932,89 @@
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "GestampPrueba.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "GestampPrueba.Infrastructure": "1.0.0",
+          "GestampPrueba.Models": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.2",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Versioning": "4.1.1",
+          "Microsoft.AspNetCore.SpaServices.Extensions": "3.1.2",
+          "Microsoft.EntityFrameworkCore": "3.1.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.2",
+          "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.6",
+          "Microsoft.EntityFrameworkCore.Sqlite": "3.1.1",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
+          "Swashbuckle.AspNetCore.Swagger": "5.1.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.1.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "5.1.0",
+          "Swashbuckle.Core": "5.6.0",
+          "System.Data.SqlClient": "4.8.1",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0",
+          "xunit.analyzers": "0.10.0"
+        },
+        "compile": {
+          "bin/placeholder/GestampPrueba.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestampPrueba.Application.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "GestampPrueba.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "GestampPrueba.Models": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.2",
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Mvc.Versioning": "4.1.1",
+          "Microsoft.AspNetCore.SpaServices.Extensions": "3.1.2",
+          "Microsoft.EntityFrameworkCore": "3.1.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.2",
+          "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.6",
+          "Microsoft.EntityFrameworkCore.Sqlite": "3.1.1",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
+          "Swashbuckle.AspNetCore.Swagger": "5.1.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.1.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "5.1.0",
+          "Swashbuckle.Core": "5.6.0",
+          "System.Data.SqlClient": "4.8.1",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0",
+          "xunit.analyzers": "0.10.0"
+        },
+        "compile": {
+          "bin/placeholder/GestampPrueba.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestampPrueba.Infrastructure.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "GestampPrueba.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/GestampPrueba.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GestampPrueba.Models.dll": {}
+        }
+      },
       "GestampPrueba2/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AutoMapper": "9.0.0",
+          "GestampPrueba.Application": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.2",
           "Microsoft.AspNetCore.Identity": "2.2.0",
           "Microsoft.AspNetCore.Mvc.Versioning": "4.1.1",
@@ -11693,6 +11771,21 @@
         "xunit.runner.visualstudio.2.4.0.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "GestampPrueba.Application/1.0.0": {
+      "type": "project",
+      "path": "../GestampPrueba.Application/GestampPrueba.Application.csproj",
+      "msbuildProject": "../GestampPrueba.Application/GestampPrueba.Application.csproj"
+    },
+    "GestampPrueba.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../GestampPrueba.Infrastructure/GestampPrueba.Infrastructure.csproj",
+      "msbuildProject": "../GestampPrueba.Infrastructure/GestampPrueba.Infrastructure.csproj"
+    },
+    "GestampPrueba.Models/1.0.0": {
+      "type": "project",
+      "path": "../GestampPrueba.Models/GestampPrueba.Models.csproj",
+      "msbuildProject": "../GestampPrueba.Models/GestampPrueba.Models.csproj"
     },
     "GestampPrueba2/1.0.0": {
       "type": "project",

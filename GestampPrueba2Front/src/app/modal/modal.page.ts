@@ -10,7 +10,6 @@ import { PersonasService } from '../personas/services/personas.service';
 export class ModalPage implements OnInit {
 
   @Input() persona: {};
-  personaToUpdate = {};
 
   constructor(private modalController: ModalController,
     private personasService:PersonasService, navParams: NavParams) { 

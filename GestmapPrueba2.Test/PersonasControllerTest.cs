@@ -17,20 +17,20 @@ namespace GestmapPrueba2.Test
 {
    public class PersonasControllerTest
     {
-        Personas3Controller _controller;
-        IPersonasService _service;
-        private readonly masterContext _context;
-        private readonly Mock<PersonasServiceFake> _mockRepo;
+        //Personas3Controller _controller;
+       // IPersonasService _service;
+        //private readonly masterContext _context;
+        //private readonly Mock<PersonasServiceFake> _mockRepo;
         HttpClient client;
         public PersonasControllerTest()
         {
-            _mockRepo = new Mock<PersonasServiceFake>();
-            _service = new PersonasServiceFake();
+           // _mockRepo = new Mock<PersonasServiceFake>();
+           // _service = new PersonasServiceFake();
            // _controller = new Personas3Controller(_mockRepo.Object);
             client = new HttpClient();
         }
 
-        [Fact]
+       /* [Fact]
         public void GetById_WhenCalled_WithCorrectId()
         {
             // Act
@@ -40,12 +40,19 @@ namespace GestmapPrueba2.Test
 
             // Assert
             Assert.Equal(id, okResult.Id);
-        }
+        }*/
 
         [Fact]
         public async Task GetPersona_HigherThan()
         {
             int age = 60;
+
+            HttpResponseMessage response = await ExecuteHttpGetPersonas();
+            Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
+
+            var result = await response.Content.ReadAsStringAsync();
+            var user = JsonConvert.DeserializeObject<Personas3>(result);
+            Assert.Equal(age, user.Edad);
         }
 
 
