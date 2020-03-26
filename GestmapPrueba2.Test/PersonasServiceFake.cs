@@ -11,7 +11,8 @@ namespace GestmapPrueba2.Test
 {
    public class PersonasServiceFake: IPersonasService
     {
-        private readonly List<Personas3> _personas;
+        private readonly IEnumerable<Personas3> _personas;
+
         public PersonasServiceFake()
         {
 
@@ -23,28 +24,51 @@ namespace GestmapPrueba2.Test
             };
         }
 
-        public IEnumerable<Personas3> GetAllPersona()
+        public Task<IEnumerable<Personas3>> GetAllPersonas()
         {
-            return _personas;
+            return  Task.FromResult(_personas);
+            //return await _personas.ToList();
+            //return null;
         }
-
+        
         public Task<ActionResult<Personas3>> PostPersonas3(Personas3 newPersona)
         {
-           newPersona.Id = 78;
-            _personas.Add(newPersona);
-            return newPersona;
+            //newPersona.Id = 78;
+             _personas.Append(newPersona);
+            //return Task.CompletedTask();
+            //return CreatedAtAction("GetPersonas3", new { id = personas3.Id }, personas3);
+            return null;
+        }
+
+        public Task<ActionResult<Personas3>> PutPersonas3(int id, Personas3 newPersona)
+        {
+            /*newPersona.Id = 78;
+             _personas.Add(newPersona);
+             return newPersona;*/
+            return null;
         }
 
         public  Task<ActionResult<Personas3>> GetById(int id)
         {
-                return _personas.Where(a => a.Id == id)
-                    .FirstOrDefault();
+            /*return _personas.Where(a => a.Id == id)
+                .FirstOrDefault();*/
+
+            
+            //return Task.FromResult(prueba);
+
+            //return _personas.Where(a => a.Id == id)
+             //   .FirstOrDefault();
+            return null;
         }
 
-        public void Remove(int id)
+        public Task<ActionResult<Personas3>> DeletePersona(int id)
         {
-            var existing = _personas.First(a => a.Id == id);
-            _personas.Remove(existing);
+            var persona = _personas.First(a => a.Id == id);
+            var existing = _personas.Where(a => a.Id == id).ToList();
+            existing.Remove(persona);
+            //return Task.FromResult(persona);
+            //return Task.FromResult(persona);
+            return null;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <returns>Devuelve un listado de personas</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Personas3>>> GetPersonas3()
+        public async Task<IEnumerable<Personas3>> GetPersonas3()
         {
             return await personasService.GetAllPersonas();
 

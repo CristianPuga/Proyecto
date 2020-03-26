@@ -11,6 +11,7 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {DialogModule} from 'primeng/dialog';
     SplitButtonModule,
     ToolbarModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    DynamicDialogModule
   ],
   declarations: [UsuariosPage]
 })

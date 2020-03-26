@@ -17,7 +17,7 @@ namespace GestampPrueba2.Infrastructure
             _context = context;
         }
 
-        public async Task<ActionResult<IEnumerable<Personas3>>> GetAllPersonas()
+        public async Task<IEnumerable<Personas3>> GetAllPersonas()
         {
             return await _context.Personas3.ToListAsync();
 
@@ -84,7 +84,7 @@ namespace GestampPrueba2.Infrastructure
             }
             _context.Personas3.Remove(personas3);
             await _context.SaveChangesAsync();
-            return personas3;
+            return Ok(personas3);
         }
 
 

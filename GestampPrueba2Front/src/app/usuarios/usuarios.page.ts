@@ -7,6 +7,7 @@ import { ModalPage } from '../modal/modal.page';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ModalUsersPage } from '../modal-users/modal-users.page';
+import {DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-usuarios',
@@ -46,7 +47,9 @@ export class UsuariosPage implements OnInit {
 
   display: boolean = false;
 
-    showDialog() {
+    showDialog(user) {
+      console.log(user);
+      this.usuario = user;
       this.display = true;
     }
 

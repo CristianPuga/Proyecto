@@ -17,42 +17,49 @@ namespace GestmapPrueba2.Test
 {
    public class PersonasControllerTest
     {
-        //Personas3Controller _controller;
-       // IPersonasService _service;
-        //private readonly masterContext _context;
+        Personas3Controller _controller;
+        IPersonasService _service;
         //private readonly Mock<PersonasServiceFake> _mockRepo;
         HttpClient client;
         public PersonasControllerTest()
         {
            // _mockRepo = new Mock<PersonasServiceFake>();
-           // _service = new PersonasServiceFake();
-           // _controller = new Personas3Controller(_mockRepo.Object);
+            _service = new PersonasServiceFake();
+            _controller = new Personas3Controller(_service);
             client = new HttpClient();
         }
 
-       /* [Fact]
+       [Fact]
         public void GetById_WhenCalled_WithCorrectId()
         {
             // Act
-            var id = 1;
+            var id = 3;
 
-            var okResult = _service.GetById(id);
+            var okResult = _controller.GetPersonas3(id);
 
             // Assert
             Assert.Equal(id, okResult.Id);
-        }*/
+        }
+
+        [Fact]
+        public void Remove_WhenCalled_WithCorrectId()
+        {
+            // Act
+            int id = 1;
+
+            // Act
+            var okResponse = _controller.DeletePersonas3(id);
+
+            // Assert
+            Assert.IsType<OkResult>(okResponse);
+        }
 
         [Fact]
         public async Task GetPersona_HigherThan()
         {
-            int age = 60;
-
+           
             HttpResponseMessage response = await ExecuteHttpGetPersonas();
             Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
-
-            var result = await response.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<Personas3>(result);
-            Assert.Equal(age, user.Edad);
         }
 
 
