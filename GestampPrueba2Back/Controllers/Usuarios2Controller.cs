@@ -26,27 +26,19 @@ namespace GestampPrueba2.Controllers
             //this.usuariosRepository = new UsuariosRepository(new masterContext());
         }
 
-       /* public Usuarios2Controller(IUsuariosRepository usuariosRepository)
-        {
-            this.usuariosRepository = usuariosRepository;
-        }*/
-
         // GET: api/Usuarios2
         /// <summary>
         /// Metodo para buscar usuarios en una base de datos
         /// </summary>
         /// <returns>Devuelve un listado de usuarios</returns>
-        /// 
-        //[AllowAnonymous]
         [HttpGet]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<Usuarios2>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
         public async Task<ActionResult<IEnumerable<Usuarios2>>> GetUsuarios2()
         {
             var usuarios = unitOfWork.UsuariosRepository.Get();
+            unitOfWork.UsuariosRepository.metodoChorra();
             return usuarios.ToList();
-            //return await usuariosRepository.GetAllUsuarios();
-            //return await _context.Usuarios2.ToListAsync();
         }
 
         // GET: api/Usuarios2/5
@@ -55,30 +47,17 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
-        //[AllowAnonymous]
         [HttpGet("{id}")]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
         {
             Usuarios2 usuario = unitOfWork.UsuariosRepository.GetByID(id);
-            return usuario;
-
-            /*var usuarios2 = await usuariosRepository.GetById(id);
-
-            if (usuarios2 == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return await usuariosRepository.GetById(id);*/
-            /*var usuarios2 = await _context.Usuarios2.FindAsync(id);
-
-            if (usuarios2 == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(usuarios2);*/
+            return Ok(usuario);
         }
 
         // PUT: api/Usuarios2/5
@@ -95,17 +74,13 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
         {
-            //return await usuariosRepository.PutUsuario(id, usuarios2);
-
             Console.WriteLine(usuarios2);
             if (id != usuarios2.Id)
             {
                 return BadRequest();
             }
 
-
-            unitOfWork.UsuariosRepository.Update(usuarios2);
-
+             unitOfWork.UsuariosRepository.Update(usuarios2);
 
             try
             {
@@ -142,7 +117,6 @@ namespace GestampPrueba2.Controllers
             unitOfWork.Save();
 
             return usuarios2;
-            //return usuariosRepository.PostUsuario(usuarios2);
         }
 
         // DELETE: api/Usuarios2/5
@@ -156,36 +130,15 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
         {
-
             Usuarios2 usuario = unitOfWork.UsuariosRepository.GetByID(id);
-            unitOfWork.UsuariosRepository.Delete(id);
-            unitOfWork.Save();
-            return usuario;
 
-            /*var usuario = await usuariosRepository.GetById(id);
             if (usuario == null)
             {
                 return NotFound();
             }
-            return await usuariosRepository.DeleteUsuario(id);*/
-
-            /*var usuarios2 = await _context.Usuarios2.FindAsync(id);
-            if (usuarios2 == null)
-            {
-                return NotFound();
-            }
-
-            _context.Usuarios2.Remove(usuarios2);
-            await _context.SaveChangesAsync();
-
-            return usuarios2;*/
+            unitOfWork.UsuariosRepository.Delete(id);
+            unitOfWork.Save();
+            return usuario;
         }
-
-        /*protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }*/
-
     }
 }

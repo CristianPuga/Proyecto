@@ -13,45 +13,12 @@ namespace GestampPrueba.Application
     {
         private readonly masterContext _context = null;
 
-        public UsuariosRepository(masterContext context) : base(context)
+        public UsuariosRepository(masterContext context) : base(context) {}
+
+        public void metodoChorra()
         {
-            
+            Console.WriteLine("Este es un metodo chorra para comprobar el unit of work");
         }
-
-
-      /*  public async Task<ActionResult<IEnumerable<Usuarios2>>> GetAllUsuarios()
-        {
-            return await _context.Usuarios2.ToListAsync();
-
-        }*/
-
-      /*  public async Task<ActionResult<Usuarios2>> GetById(int id)
-        {
-            return _context.Usuarios2.Find(id);
-        }*/
-
-        /*public async Task<ActionResult<Usuarios2>> PostUsuario([FromBody] Usuarios2 usuarios2)
-        {
-            _context.Usuarios2.Add(usuarios2);
-            await _context.SaveChangesAsync();
-            return usuarios2;
-        }*/
-
-      /*  public async Task<ActionResult<Usuarios2>> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
-        {
-            _context.Entry(usuarios2).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return usuarios2;
-        }*/
-
-
-        /*public async Task<ActionResult<Usuarios2>> DeleteUsuario(int id)
-        {
-            Usuarios2 usuario = await _context.Usuarios2.FindAsync(id);
-            _context.Usuarios2.Remove(usuario);
-            await _context.SaveChangesAsync();
-            return usuario;
-        }*/
 
         public void Save()
         {
@@ -79,3 +46,46 @@ namespace GestampPrueba.Application
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+/*  public async Task<ActionResult<IEnumerable<Usuarios2>>> GetAllUsuarios()
+  {
+      return await _context.Usuarios2.ToListAsync();
+
+  }*/
+
+/*  public async Task<ActionResult<Usuarios2>> GetById(int id)
+  {
+      return _context.Usuarios2.Find(id);
+  }*/
+
+/*public async Task<ActionResult<Usuarios2>> PostUsuario([FromBody] Usuarios2 usuarios2)
+{
+    _context.Usuarios2.Add(usuarios2);
+    await _context.SaveChangesAsync();
+    return usuarios2;
+}*/
+
+/*  public async Task<ActionResult<Usuarios2>> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
+  {
+      _context.Entry(usuarios2).State = EntityState.Modified;
+      await _context.SaveChangesAsync();
+      return usuarios2;
+  }*/
+
+
+/*public async Task<ActionResult<Usuarios2>> DeleteUsuario(int id)
+{
+    Usuarios2 usuario = await _context.Usuarios2.FindAsync(id);
+    _context.Usuarios2.Remove(usuario);
+    await _context.SaveChangesAsync();
+    return usuario;
+}*/

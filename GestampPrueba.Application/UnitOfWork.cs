@@ -8,17 +8,17 @@ namespace GestampPrueba.Application
     public class UnitOfWork: IDisposable
     {
         private masterContext context = new masterContext();
-        private GenericRepository<Usuarios2> usuariosRepository;
+        private UsuariosRepository usuariosRepository;
         private GenericRepository<Personas3> personasRepository;
 
-        public GenericRepository<Usuarios2> UsuariosRepository
+        public UsuariosRepository UsuariosRepository
         {
             get
             {
 
                 if (this.usuariosRepository == null)
                 {
-                    this.usuariosRepository = new GenericRepository<Usuarios2>(context);
+                    this.usuariosRepository = new UsuariosRepository(context);
                 }
                 return usuariosRepository;
             }
