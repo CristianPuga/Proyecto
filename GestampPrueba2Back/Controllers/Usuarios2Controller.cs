@@ -18,12 +18,12 @@ namespace GestampPrueba2.Controllers
     [Route("/usuarios")]
     public class Usuarios2Controller : ControllerBase
     {
-        private IUsuariosRepository usuariosRepository;
+        //private IUsuariosRepository usuariosRepository;
         private UnitOfWork unitOfWork = new UnitOfWork();
 
         public Usuarios2Controller()
         {
-            this.usuariosRepository = new UsuariosRepository(new masterContext());
+            //this.usuariosRepository = new UsuariosRepository(new masterContext());
         }
 
        /* public Usuarios2Controller(IUsuariosRepository usuariosRepository)
