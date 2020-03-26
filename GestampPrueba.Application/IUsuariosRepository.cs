@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace GestampPrueba.Application
 {
-    public interface IUsuariosService
+    public interface IUsuariosRepository: IDisposable
     {
         Task<ActionResult<IEnumerable<Usuarios2>>> GetAllUsuarios();
-        Task<ActionResult<Usuarios2>> PostUsuarios2(Usuarios2 newUsuario);
+        Task<ActionResult<Usuarios2>> PostUsuario(Usuarios2 newUsuario);
         Task<ActionResult<Usuarios2>> GetById(int id);
-        Task<ActionResult<Usuarios2>> PutUsuario2(int id, Usuarios2 newUsuario);
+        Task<ActionResult<Usuarios2>> PutUsuario(int id, Usuarios2 newUsuario);
         Task<ActionResult<Usuarios2>> DeleteUsuario(int id);
     }
 }

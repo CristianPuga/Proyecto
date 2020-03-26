@@ -83,8 +83,8 @@ namespace GestampPrueba2
 
             // configure DI for application services
             services.AddTransient<ITokenRepository, TokenRepository>();
-            services.AddTransient<IPersonasService, PersonasServices>();
-            services.AddTransient<IUsuariosService, UsuariosService>();
+            services.AddTransient<IPersonasRepository, PersonasRepository>();
+            services.AddTransient<IUsuariosRepository, UsuariosRepository>();
 
 
 

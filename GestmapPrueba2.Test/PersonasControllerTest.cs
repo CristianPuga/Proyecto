@@ -18,7 +18,7 @@ namespace GestmapPrueba2.Test
    public class PersonasControllerTest
     {
         Personas3Controller _controller;
-        IPersonasService _service;
+        IPersonasRepository _service;
         //private readonly Mock<PersonasServiceFake> _mockRepo;
         HttpClient client;
         public PersonasControllerTest()

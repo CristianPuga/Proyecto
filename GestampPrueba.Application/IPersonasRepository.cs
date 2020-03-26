@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestampPrueba2.Infrastructure
 {
-    public interface IPersonasService
+    public interface IPersonasRepository
     {
         Task<IEnumerable<Personas3>> GetAllPersonas();
         Task<ActionResult<Personas3>> PostPersonas3(Personas3 newPersona);

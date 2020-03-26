@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GestampPrueba2.Infrastructure
 {
-    public class PersonasServices: ControllerBase, IPersonasService
+    public class PersonasRepository: ControllerBase, IPersonasRepository
     {
         private readonly masterContext _context = null;
 
-        public PersonasServices(masterContext context)
+        public PersonasRepository(masterContext context)
         {
             _context = context;
         }

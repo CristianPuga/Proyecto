@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace GestampPrueba.Application
 {
-    public class UsuariosService: ControllerBase, IUsuariosService
+    public class UsuariosRepository: ControllerBase, IUsuariosRepository
     {
         private readonly masterContext _context = null;
 
-        public UsuariosService(masterContext context)
+        public UsuariosRepository(masterContext context)
         {
             _context = context;
         }
@@ -38,7 +38,7 @@ namespace GestampPrueba.Application
 
         }
 
-        public async Task<ActionResult<Usuarios2>> PostUsuarios2([FromBody] Usuarios2 usuarios2)
+        public async Task<ActionResult<Usuarios2>> PostUsuario([FromBody] Usuarios2 usuarios2)
         {
             _context.Usuarios2.Add(usuarios2);
             await _context.SaveChangesAsync();
@@ -47,7 +47,7 @@ namespace GestampPrueba.Application
 
         }
 
-        public async Task<ActionResult<Usuarios2>> PutUsuario2(int id, [FromBody] Usuarios2 usuarios2)
+        public async Task<ActionResult<Usuarios2>> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
         {
             if (id != usuarios2.Id)
             {
@@ -62,7 +62,7 @@ namespace GestampPrueba.Application
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Usuarios2Exist(id))
+                if (!UsuarioExist(id))
                 {
                     return NotFound();
                 }
@@ -79,17 +79,33 @@ namespace GestampPrueba.Application
         public async Task<ActionResult<Usuarios2>> DeleteUsuario(int id)
         {
             var usuario = await _context.Usuarios2.FindAsync(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
             _context.Usuarios2.Remove(usuario);
             await _context.SaveChangesAsync();
             return usuario;
         }
 
+        private bool disposed = false;
 
-        private bool Usuarios2Exist(int id)
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
+        private bool UsuarioExist(int id)
         {
             return _context.Usuarios2.Any(e => e.Id == id);
         }

@@ -17,9 +17,9 @@ namespace GestampPrueba2.Controllers
     [Route("/personas")]
     public class Personas3Controller : ControllerBase
     {
-        private readonly IPersonasService personasService;
+        private readonly IPersonasRepository personasService;
 
-        public Personas3Controller(IPersonasService service)
+        public Personas3Controller(IPersonasRepository service)
         { 
             personasService = service;
         }

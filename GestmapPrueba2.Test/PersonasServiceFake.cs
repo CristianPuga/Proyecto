@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GestmapPrueba2.Test
 {
-   public class PersonasServiceFake: IPersonasService
+   public class PersonasServiceFake: ControllerBase, IPersonasRepository
     {
         private readonly IEnumerable<Personas3> _personas;
 
@@ -48,26 +48,34 @@ namespace GestmapPrueba2.Test
             return null;
         }
 
-        public  Task<ActionResult<Personas3>> GetById(int id)
+        public async Task<ActionResult<Personas3>> GetById(int id)
         {
-            /*return _personas.Where(a => a.Id == id)
-                .FirstOrDefault();*/
 
-            
-            //return Task.FromResult(prueba);
+            var personas3 = _personas.Where(a => a.Id == id);
 
+            if (personas3 == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(personas3);
             //return _personas.Where(a => a.Id == id)
-             //   .FirstOrDefault();
-            return null;
+            //    .FirstOrDefault();
+            //return null;
         }
 
-        public Task<ActionResult<Personas3>> DeletePersona(int id)
+        public async Task<ActionResult<Personas3>> DeletePersona(int id)
         {
-            var persona = _personas.First(a => a.Id == id);
-            var existing = _personas.Where(a => a.Id == id).ToList();
-            existing.Remove(persona);
-            //return Task.FromResult(persona);
-            //return Task.FromResult(persona);
+
+            var personas3 =  _personas.First(a=> a.Id == id);
+            var existing = _personas.ToList();
+             if (personas3 == null)
+             {
+                 return NotFound();
+             }
+            existing.Remove(personas3);
+            _personas.Append(personas3);
+            //return Task.FromResult(personas3);
             return null;
         }
     }
