@@ -13,31 +13,31 @@ using GestampPrueba.Application;
 namespace GestampPrueba2.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     [ApiVersion("2.0")]
     [Route("/usuarios")]
     public class Usuarios2Controller : ControllerBase
     {
-        //private IUsuariosRepository usuariosRepository;
-        private UnitOfWork unitOfWork = new UnitOfWork();
+         private readonly IUsuariosService usuarioService;
 
-        public Usuarios2Controller()
+        public Usuarios2Controller(IUsuariosService usuariosService)
         {
-            //this.usuariosRepository = new UsuariosRepository(new masterContext());
+            usuarioService = usuariosService;
         }
 
         // GET: api/Usuarios2
         /// <summary>
-        /// Metodo para buscar usuarios en una base de datos
+        /// Metodo para buscard
+        /// usuarios en una base de datos
         /// </summary>
         /// <returns>Devuelve un listado de usuarios</returns>
         [HttpGet]
         [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<Usuarios2>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
-        public async Task<ActionResult<IEnumerable<Usuarios2>>> GetUsuarios2()
+        public IEnumerable<Usuarios2> GetUsuarios2()
         {
-            var usuarios = unitOfWork.UsuariosRepository.Get();
-            unitOfWork.UsuariosRepository.metodoChorra();
+            var usuarios = usuarioService.GetAll();
+            usuarioService.metodoChorra();
             return usuarios.ToList();
         }
 
@@ -52,7 +52,7 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
         {
-            Usuarios2 usuario = unitOfWork.UsuariosRepository.GetByID(id);
+            Usuarios2 usuario = usuarioService.GetById(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -80,11 +80,9 @@ namespace GestampPrueba2.Controllers
                 return BadRequest();
             }
 
-             unitOfWork.UsuariosRepository.Update(usuarios2);
-
             try
             {
-                unitOfWork.Save();
+                usuarioService.Update(usuarios2);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -97,7 +95,6 @@ namespace GestampPrueba2.Controllers
                     throw;
                 }*/
             }
-
             return NoContent();
         }
 
@@ -113,9 +110,7 @@ namespace GestampPrueba2.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuarios2>> PostUsuario([FromBody] Usuarios2 usuarios2)
         {
-            unitOfWork.UsuariosRepository.Insert(usuarios2);
-            unitOfWork.Save();
-
+            usuarioService.Insert(usuarios2);
             return usuarios2;
         }
 
@@ -130,14 +125,12 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
         {
-            Usuarios2 usuario = unitOfWork.UsuariosRepository.GetByID(id);
-
+            Usuarios2 usuario = usuarioService.GetById(id);
             if (usuario == null)
             {
                 return NotFound();
             }
-            unitOfWork.UsuariosRepository.Delete(id);
-            unitOfWork.Save();
+            usuarioService.Delete(id);
             return usuario;
         }
     }

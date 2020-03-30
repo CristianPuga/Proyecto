@@ -1,4 +1,5 @@
-﻿using GestampPrueba2.Models;
+﻿using GestampPrueba2.Infrastructure;
+using GestampPrueba2.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace GestampPrueba.Application
     {
         private masterContext context = new masterContext();
         private UsuariosRepository usuariosRepository;
-        private GenericRepository<Personas3> personasRepository;
+        private PersonasRepository personasRepository;
 
         public UsuariosRepository UsuariosRepository
         {
@@ -24,14 +25,14 @@ namespace GestampPrueba.Application
             }
         }
 
-        public GenericRepository<Personas3> PersonasRepository
+        public PersonasRepository PersonasRepository
         {
             get
             {
 
                 if (this.personasRepository == null)
                 {
-                    this.personasRepository = new GenericRepository<Personas3>(context);
+                    this.personasRepository = new PersonasRepository(context);
                 }
                 return personasRepository;
             }

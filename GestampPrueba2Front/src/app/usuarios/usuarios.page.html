@@ -60,6 +60,9 @@
       </tr>
   </ng-template>
 </p-table>
+<p-paginator [rows]="1"[rowsPerPageOptions]="[2,4,6]" [totalRecords]="5"></p-paginator>
+
+
 
 <p-dialog header="Actualizar usuario" [transitionOptions]="'15ms'" [(visible)]="display">
     <ion-item>
@@ -76,7 +79,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Activo: </ion-label>
-      <ion-input type="number" [(ngModel)]="usuario.activo" name="activo"></ion-input>
+      <ion-input type="text" [(ngModel)]="usuario.activo" name="activo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Imagen: </ion-label>

@@ -1,8 +1,9 @@
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\bin\Debug\netcoreapp3.1\GestampPrueba.Models.deps.json
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\bin\Debug\netcoreapp3.1\GestampPrueba.Models.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\bin\Debug\netcoreapp3.1\GestampPrueba.Models.pdb
-C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.csprojAssemblyReference.cache
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.AssemblyInfoInputs.cache
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.AssemblyInfo.cs
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.pdb
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.csprojAssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Models\obj\Debug\netcoreapp3.1\GestampPrueba.Models.csproj.CoreCompileInputs.cache

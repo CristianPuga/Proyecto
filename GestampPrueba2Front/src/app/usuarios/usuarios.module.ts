@@ -12,6 +12,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {PaginatorModule} from 'primeng/paginator';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
     ToolbarModule,
     TableModule,
     DialogModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    PaginatorModule
   ],
   declarations: [UsuariosPage]
 })

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GestampPrueba.Application
 {
-    public class GenericRepository<TEntity> where TEntity: class
+    public class GenericRepository<TEntity>: IGenericRepository<TEntity> where TEntity: class
     {
         internal masterContext context;
         internal DbSet<TEntity> dbSet;

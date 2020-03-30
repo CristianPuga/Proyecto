@@ -17,6 +17,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using GestampPrueba.Application;
+using GestampPrueba.Application.Services;
 
 namespace GestampPrueba2
 {
@@ -35,8 +36,8 @@ namespace GestampPrueba2
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<masterContext>(options => options.UseSqlServer(connection));
+            //var connection = Configuration.GetConnectionString("MasterDatabase");
+            services.AddDbContext<masterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MasterDatabase")));
 
             services.AddCors(options =>
             {
@@ -85,6 +86,9 @@ namespace GestampPrueba2
             services.AddTransient<ITokenRepository, TokenRepository>();
             services.AddTransient<IPersonasRepository, PersonasRepository>();
             services.AddTransient<IUsuariosRepository, UsuariosRepository>();
+            services.AddScoped<IUsuariosService, UsuariosService>();
+            services.AddScoped<IPersonasService, PersonasService>();
+
 
 
 

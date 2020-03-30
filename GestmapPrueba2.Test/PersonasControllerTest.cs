@@ -1,4 +1,5 @@
-﻿using GestampPrueba2.Controllers;
+﻿using GestampPrueba.Application.Services;
+using GestampPrueba2.Controllers;
 using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,12 +19,10 @@ namespace GestmapPrueba2.Test
    public class PersonasControllerTest
     {
         Personas3Controller _controller;
-        IPersonasRepository _service;
-        //private readonly Mock<PersonasServiceFake> _mockRepo;
+        IPersonasService _service;
         HttpClient client;
         public PersonasControllerTest()
         {
-           // _mockRepo = new Mock<PersonasServiceFake>();
             _service = new PersonasServiceFake();
             _controller = new Personas3Controller(_service);
             client = new HttpClient();
@@ -33,12 +32,12 @@ namespace GestmapPrueba2.Test
         public void GetById_WhenCalled_WithCorrectId()
         {
             // Act
-            var id = 3;
+            int id = 3;
 
             var okResult = _controller.GetPersonas3(id);
 
             // Assert
-            Assert.Equal(id, okResult.Id);
+            Assert.IsType<OkObjectResult>(okResult.Result);
         }
 
         [Fact]
@@ -55,48 +54,89 @@ namespace GestmapPrueba2.Test
         }
 
         [Fact]
-        public async Task GetPersona_HigherThan()
+        public void Get_WhenCalled_ReturnsOkResult()
         {
-           
-            HttpResponseMessage response = await ExecuteHttpGetPersonas();
-            Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
+            // Act
+            var okResult = _controller.GetPersonas3();
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult.Result);
         }
 
+        [Fact]
+        public void Get_WhenCalled_ReturnsAllItems()
+        {
+            // Act
+            var okResult = _controller.GetPersonas3().Result as OkObjectResult;
+
+            // Assert
+            var items = Assert.IsType<List<Personas3>>(okResult.Value);
+            Assert.Equal(3, items.Count);
+        }
 
         [Fact]
-        public async Task GetUsuariosId_WhenCalled_CorrectID()
+        public void GetById_UnknownIdPassed_ReturnsNotFoundResult()
         {
+            int id = 10;
+            // Act
+            var notFoundResult = _controller.GetPersonas3(id);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(notFoundResult.Result);
+        }
+
+        [Fact]
+        public void GetById_ExistingIdPassed_ReturnsRightItem()
+        {
+            // Arrange
             int id = 1;
 
-            HttpResponseMessage response = await ExecuteHttpGetPersonasById(id);
-            Assert.Equal((int)HttpStatusCode.OK, (int)response.StatusCode);
+            // Act
+            var okResult = _controller.GetPersonas3(id).Result as OkObjectResult;
 
-            var result = await response.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<Personas3>(result);
-            Assert.Equal(1, user.Id);
-        }
-
-
-        private async Task<HttpResponseMessage> ExecuteHttpGetPersonas()
-        {
-            string token = await GetToken();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/personas");
-            return response;
-        }
-
-        private async Task<HttpResponseMessage> ExecuteHttpGetPersonasById(int id)
-        {
-            string token = await GetToken();
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            HttpResponseMessage response = await client.GetAsync($"http://localhost:5000/personas/{id}");
-            return response;
+            // Assert
+            Assert.IsType<Personas3>(okResult.Value);
+            Assert.Equal(id, (okResult.Value as Personas3).Id);
         }
 
         [Fact]
+        public void Add_InvalidObjectPassed_ReturnsBadRequest()
+        {
+            // Arrange
+            var nameMissingItem = new Personas3()
+            {
+                Nombre = "Guinness Original 6 Pack",
+                Apellido = "Guinness",
+                Edad = 15
+            };
+            _controller.ModelState.AddModelError("Nombre", "Required");
+
+            // Act
+            var badResponse = _controller.PostPersonas3(nameMissingItem);
+
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(badResponse);
+        }
+
+        [Fact]
+        public void Add_ValidObjectPassed_ReturnsCreatedResponse()
+        {
+            // Arrange
+            Personas3 testItem = new Personas3()
+            {
+               // Nombre = "Guinness Original 6 Pack",
+                Apellido = "Guinness",
+                Edad = 15
+            };
+
+            // Act
+            var createdResponse = _controller.PostPersonas3(testItem);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(createdResponse);
+        }
+
+
         public async Task<string> GetToken()
         {
             var data = JsonConvert.SerializeObject(new
