@@ -259,5 +259,6 @@ C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netco
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.csproj.CopyComplete
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.pdb
-C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.genruntimeconfig.cache
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestmapPrueba2.Test\obj\Debug\netcoreapp3.1\GestmapPrueba2.Test.csproj.CoreCompileInputs.cache

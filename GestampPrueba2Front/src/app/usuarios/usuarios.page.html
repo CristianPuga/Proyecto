@@ -48,9 +48,10 @@
           <td>{{rowData.id}}</td>
           <td>{{rowData.nombreUsuario}}</td>
           <td>{{rowData.contrasena}}</td>
+          <td>{{rowData.email}}</td>
           <td><ion-toggle name="activo" color="light" [checked]="rowData.activo" (click)="modificar(rowData)"></ion-toggle></td>
           <td>
-              <img src="{{rowData.img}}" style="width: 36px; margin-right: 1em; vertical-align: middle;">
+            <img src="{{rowData.img}}" style="width: 36px; margin-right: 1em; vertical-align: middle;">
           </td>
           <td>
               <button pButton type="button" (click)="showDialog(rowData)" class="ui-button-success" icon="pi pi-search" style="margin-right: .5em"></button>
@@ -67,23 +68,23 @@
 <p-dialog header="Actualizar usuario" [transitionOptions]="'15ms'" [(visible)]="display">
     <ion-item>
       <ion-label>Id: </ion-label>
-      <ion-input  [(ngModel)]="usuario.id" name="id" required></ion-input>
+      <ion-input  [(ngModel)]="usersInfo.id" name="id" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Nombre: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.nombreUsuario" name="nombreUsuario"></ion-input>
+      <ion-input type="text" [(ngModel)]="usersInfo.nombreUsuario" name="nombreUsuario"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Contraseña: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.contrasena" name="contrasena"></ion-input>
+      <ion-input type="text" [(ngModel)]="usersInfo.contrasena" name="contrasena"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Activo: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.activo" name="activo"></ion-input>
+      <ion-input type="text" [(ngModel)]="usersInfo.activo" name="activo"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Imagen: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.img" name="img"></ion-input>
+      <ion-input type="text" [(ngModel)]="usersInfo.img" name="img"></ion-input>
     </ion-item>
 </p-dialog>
 

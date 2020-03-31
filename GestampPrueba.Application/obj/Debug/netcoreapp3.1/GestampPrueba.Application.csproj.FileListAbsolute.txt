@@ -13,5 +13,5 @@ C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.csproj.CopyComplete
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.pdb
-C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.genruntimeconfig.cache
+C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba.Application\obj\Debug\netcoreapp3.1\GestampPrueba.Application.csproj.CoreCompileInputs.cache

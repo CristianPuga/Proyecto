@@ -19,6 +19,12 @@ export class UsuariosService {
     return this.http.get('http://localhost:5000/usuarios');
   }
 
+  getInfoUsers(id): Observable<any>{
+    console.log("Obteniendo detaller usuario");
+    return this.http.get('http://localhost:5000/usuarios/' + id);
+    
+  }
+
   updateActivo(user){
     console.log("Activando...");
     console.log(user);

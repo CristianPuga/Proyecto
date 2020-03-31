@@ -1,4 +1,4 @@
-﻿using GestampPrueba.Application;
+﻿ using GestampPrueba.Application;
 using GestampPrueba.Application.Services;
 using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
@@ -9,6 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http.ModelBinding;
 
 namespace GestmapPrueba2.Test
 {
@@ -27,7 +28,7 @@ namespace GestmapPrueba2.Test
             };
         }
 
-        public virtual IEnumerable<Personas3> GetAll()
+        public IEnumerable<Personas3> GetAll()
         {
             return _personas;
         }
@@ -39,19 +40,19 @@ namespace GestmapPrueba2.Test
         }
 
         public virtual void Delete(Personas3 entitytoDelete)
-        {
-            
+        {            
         }
         public virtual void Delete(int id)
         {
             var existing = _personas.First(a => a.Id == id);
-            _personas.Remove(existing);
-            
+            _personas.Remove(existing);  
         }
 
         public virtual void Update(Personas3 entityToUpdate)
         {
-            
+            var persona = _personas.First(a => a.Id == entityToUpdate.Id);
+            _personas.Remove(persona);
+            _personas.Add(entityToUpdate);
         }
 
         public Personas3 Insert(Personas3 entity)
@@ -59,6 +60,10 @@ namespace GestmapPrueba2.Test
             _personas.Add(entity);
             return entity;
         }
+
+        /*private Personas3 BadRequest(ModelState modelState)
+        {
+        }*/
 
         public void metodoChorra()
         {

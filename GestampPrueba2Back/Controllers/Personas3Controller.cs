@@ -14,7 +14,7 @@ using GestampPrueba.Application.Services;
 namespace GestampPrueba2.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("/personas")]
     public class Personas3Controller : ControllerBase
@@ -136,5 +136,6 @@ namespace GestampPrueba2.Controllers
             personasService.Delete(id);
             return Ok();
         }
+
     }
 }

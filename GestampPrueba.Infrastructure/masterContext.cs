@@ -10,8 +10,7 @@ namespace GestampPrueba2.Models
         {
         }
 
-        public masterContext(DbContextOptions<masterContext> options)
-            : base(options)
+        public masterContext(DbContextOptions<masterContext> options): base(options)
         {
         }
 

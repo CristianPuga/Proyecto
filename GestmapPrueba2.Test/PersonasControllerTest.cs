@@ -7,6 +7,7 @@ using Moq;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,7 +29,20 @@ namespace GestmapPrueba2.Test
             client = new HttpClient();
         }
 
-       [Fact]
+        [Fact]
+        public void Remove_NotExistingID_ReturnsNotFoundResponse()
+        {
+            // Arrange
+            var id = 112;
+
+            // Act
+            var badResponse = _controller.DeletePersonas3(id);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(badResponse);
+        }
+
+        [Fact]
         public void GetById_WhenCalled_WithCorrectId()
         {
             // Act
@@ -103,13 +117,13 @@ namespace GestmapPrueba2.Test
         public void Add_InvalidObjectPassed_ReturnsBadRequest()
         {
             // Arrange
-            var nameMissingItem = new Personas3()
+            Personas3 nameMissingItem = new Personas3()
             {
+                Id = 1,
                 Nombre = "Guinness Original 6 Pack",
-                Apellido = "Guinness",
-                Edad = 15
+                Apellido = "hola"
             };
-            _controller.ModelState.AddModelError("Nombre", "Required");
+            _controller.ModelState.AddModelError("Edad", "Required");
 
             // Act
             var badResponse = _controller.PostPersonas3(nameMissingItem);
@@ -124,9 +138,11 @@ namespace GestmapPrueba2.Test
             // Arrange
             Personas3 testItem = new Personas3()
             {
-               // Nombre = "Guinness Original 6 Pack",
-                Apellido = "Guinness",
+                Id = 4,
+                Nombre = "Guinness Original 6 Pack",
+                Apellido = "hola",
                 Edad = 15
+                
             };
 
             // Act
@@ -136,20 +152,49 @@ namespace GestmapPrueba2.Test
             Assert.IsType<CreatedAtActionResult>(createdResponse);
         }
 
-
-        public async Task<string> GetToken()
+        [Fact]
+        public void Remove_ExistingGuidPassed_RemovesOneItem()
         {
-            var data = JsonConvert.SerializeObject(new
-            {
-                nombreUsuario = "pugaman",
-                contrasena = "1234"
-            });
+            // Arrange
+            var id = 1;
 
-            HttpResponseMessage response = await client.PostAsync("http://localhost:5000/api/token", new StringContent(data, Encoding.UTF8, "application/json"));
+            // Act
+            var okResponse = _controller.DeletePersonas3(id);
 
-            var result = await response.Content.ReadAsStringAsync();
-            var user = JsonConvert.DeserializeObject<Prueba>(result);
-            return user.Token;
+            // Assert
+            Assert.Equal(2, _service.GetAll().Count());
         }
+
+        [Fact]
+        public void Check_Get_Number_In_Age()
+        {
+            int id = 3;
+            int edad = 50;
+
+            var okResult = _controller.GetPersonas3(id).Result as ObjectResult;
+            Assert.IsType<Personas3>(okResult.Value);
+            Assert.Equal(edad, (okResult.Value as Personas3).Edad);
+        }
+
+       /* [Fact]
+        public void PutUser_With_Correct_Params()
+        {
+            int id = 4;
+
+            Personas3 testItem = new Personas3()
+            {
+                Id = 4,
+                Nombre = "Pepito Guacamole",
+                Apellido = "hola",
+                Edad = 100
+
+            };
+
+            // Act
+            var createdResponse = _controller.PutPersonas3(id, testItem);
+
+            // Assert
+            Assert.IsType<CreatedAtActionResult>(createdResponse);
+        }*/
     }
 }

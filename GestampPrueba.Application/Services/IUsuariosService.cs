@@ -1,6 +1,6 @@
 ﻿using GestampPrueba2.Models;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GestampPrueba.Application
@@ -12,6 +12,6 @@ namespace GestampPrueba.Application
         Usuarios2 GetById(int id);
         void Delete(int id);
         void Update(Usuarios2 modUsuario);
-        void metodoChorra();
+        void MetodoChorra();
     }
 }

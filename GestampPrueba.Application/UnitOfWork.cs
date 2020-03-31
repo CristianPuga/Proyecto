@@ -8,7 +8,7 @@ namespace GestampPrueba.Application
 {
     public class UnitOfWork: IDisposable
     {
-        private masterContext context = new masterContext();
+        private readonly masterContext context = new masterContext();
         private UsuariosRepository usuariosRepository;
         private PersonasRepository personasRepository;
 

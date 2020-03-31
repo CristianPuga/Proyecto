@@ -49,9 +49,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "AutoMapper": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -194,9 +194,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "AutoMapper": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -334,6 +334,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -395,9 +401,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "AutoMapper": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[7.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -540,6 +546,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.Versioning": {
               "target": "Package",
               "version": "[4.1.1, )"

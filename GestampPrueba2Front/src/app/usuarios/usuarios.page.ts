@@ -19,6 +19,7 @@ export class UsuariosPage implements OnInit {
   cols: any[];
   
   usersArray = []
+  usersInfo = {}
   usuario:UserEntity;
   selectedUser: UserEntity;
 
@@ -40,6 +41,7 @@ export class UsuariosPage implements OnInit {
       { field: 'id', header: 'Id' },
       { field: 'nombreUsuario', header: 'Nombre Usuario' },
       { field: 'contrasena', header: 'Contraseña' },
+      { field: 'email', header: 'Email' },
       { field: 'activo', header: 'Inactivo/Activo' },
       { field: 'img', header: 'Img' }
   ];
@@ -48,12 +50,12 @@ export class UsuariosPage implements OnInit {
   display: boolean = false;
 
     showDialog(user) {
-      console.log(user);
-      this.usuario = user;
+      this.getInfo(user.id);      
       this.display = true;
     }
 
-    showModalUser(usuario){
+    showModalUser(usuario){      
+      //this.getInfo(usuario.id)
       this.presentModal2(usuario);
     }
 
@@ -75,12 +77,27 @@ export class UsuariosPage implements OnInit {
       
     }
 
-  reload(){
+    reload(){
        this.usuariosService.getUsuarios().subscribe(
       (val) => {
           console.log("POST call successful value returned in body");
           console.log(val);
           this.usersArray = val;
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      });
+  }
+
+  getInfo(id){
+    this.usuariosService.getInfoUsers(id).subscribe(
+      (val) => {
+          console.log("POST call successful value returned in body");
+          console.log(val);
+          this.usersInfo = val;
       },
       response => {
           console.log("POST call in error", response);

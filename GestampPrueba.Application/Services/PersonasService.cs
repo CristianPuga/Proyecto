@@ -1,13 +1,14 @@
 ﻿using GestampPrueba2.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GestampPrueba.Application.Services
 {
     public class PersonasService: IPersonasService
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
         public Personas3 Insert(Personas3 newPersona)
         {
             unitOfWork.PersonasRepository.Insert(newPersona);

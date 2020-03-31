@@ -22,6 +22,10 @@
       <ion-input type="text" [(ngModel)]="usuario.contrasena" name="contrasena" required></ion-input>
     </ion-item>
     <ion-item>
+      <ion-label>Email: </ion-label>
+      <ion-input type="email" [(ngModel)]="usuario.email" name="email" required></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Activo: </ion-label>
       <ion-input type="boolean" [(ngModel)]="usuario.activo" name="activo" disabled required></ion-input>
     </ion-item>

@@ -1,21 +1,34 @@
-﻿using GestampPrueba2.Models;
+﻿using AutoMapper;
+using GestampPrueba2.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GestampPrueba.Application
 {
     public class UsuariosService: IUsuariosService
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+        private readonly UnitOfWork unitOfWork = new UnitOfWork();
+      /*  private readonly IMapper _mapper;
+
+        public UsuariosService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }*/
+
         public void Insert(Usuarios2 newUsuario)
         {
-           unitOfWork.UsuariosRepository.Insert(newUsuario);
+            unitOfWork.UsuariosRepository.Insert(newUsuario);
             unitOfWork.Save();
         }
 
         public IEnumerable<Usuarios2> GetAll()
         {
+           /* var usuarios = unitOfWork.UsuariosRepository.Get();
+            UsuariosShowDTO usuariosShowDTO = _mapper.Map<UsuariosShowDTO>(usuarios);
+            return usuariosShowDTO;*/
+
             return unitOfWork.UsuariosRepository.Get();
         }
 
@@ -36,9 +49,17 @@ namespace GestampPrueba.Application
             unitOfWork.Save();
         }
 
-        public void metodoChorra()
+        public void MetodoChorra()
         {
             unitOfWork.UsuariosRepository.metodoChorra();
         }
+
+        /*private bool UsuarioExist(int id)
+        {
+            if (unitOfWork.UsuariosRepository.GetByID(id))
+            {
+
+            }
+        }*/
     }
 }

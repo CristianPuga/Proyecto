@@ -9,6 +9,7 @@ using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
 using GestampPrueba.Application;
+using AutoMapper;
 
 namespace GestampPrueba2.Controllers
 {
@@ -19,10 +20,12 @@ namespace GestampPrueba2.Controllers
     public class Usuarios2Controller : ControllerBase
     {
          private readonly IUsuariosService usuarioService;
+        private readonly IMapper _mapper;
 
-        public Usuarios2Controller(IUsuariosService usuariosService)
+        public Usuarios2Controller(IUsuariosService usuariosService, IMapper mapper)
         {
             usuarioService = usuariosService;
+            _mapper = mapper;
         }
 
         // GET: api/Usuarios2
@@ -37,7 +40,6 @@ namespace GestampPrueba2.Controllers
         public IEnumerable<Usuarios2> GetUsuarios2()
         {
             var usuarios = usuarioService.GetAll();
-            usuarioService.metodoChorra();
             return usuarios.ToList();
         }
 
@@ -72,7 +74,7 @@ namespace GestampPrueba2.Controllers
         [HttpPut("{id}")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Updated Object", Type = typeof(NoContentResult))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
-        public async Task<ActionResult<Usuarios2>> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
+        public async Task<ActionResult> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
         {
             Console.WriteLine(usuarios2);
             if (id != usuarios2.Id)
