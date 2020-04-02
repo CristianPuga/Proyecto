@@ -60,7 +60,7 @@
             <param name="id"></param>
             <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
         </member>
-        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PutUsuario(System.Int32,GestampPrueba2.Models.Usuarios2)">
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PutUsuario(System.Int32,GestampPrueba.Application.DTOs.UsuariosEditDTO)">
             <summary>
             Modifica a un usuario
             </summary>
@@ -68,7 +68,7 @@
             <param name="usuarios2"></param>
             <returns>Devuelve al usuario modificado</returns>
         </member>
-        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PostUsuario(GestampPrueba2.Models.Usuarios2)">
+        <member name="M:GestampPrueba2.Controllers.Usuarios2Controller.PostUsuario(GestampPrueba.Application.DTOs.UsuariosPostDTO)">
             <summary>
             Añade un usuario a la base de datos
             </summary>

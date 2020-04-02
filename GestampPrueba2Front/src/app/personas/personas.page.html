@@ -15,7 +15,7 @@
       <tr>
         <th>Id</th>
         <th>Nombre</th>
-        <th>Apellido</th>
+        <!--<th>Apellido</th>-->
         <th>Edad</th>
         <th>Acciones</th>
         
@@ -25,7 +25,7 @@
       <tr *ngFor="let persona of items">
         <td>{{ persona.id}}</td>
         <td>{{ persona.nombre }}</td>
-        <td>{{ persona.apellido }}</td>
+        <!--<td>{{ persona.apellido }}</td>-->
         <td>{{ persona.edad }}</td>
         <td><button type="button" class="btn btn-info" (click)="mostrar(persona)"> Mostrar</button></td>
 
@@ -49,4 +49,25 @@
     </ion-item>
     <ion-button  size="large" type="submit" expand="block">Guardar</ion-button>
   </form>
+
+
+  <p-dialog header="Detalles persona" [transitionOptions]="'15ms'" [(visible)]="display">
+    <ion-item>
+      <ion-label>Id: </ion-label>
+      <ion-input  [(ngModel)]="personInfo.id" name="id" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nombre: </ion-label>
+      <ion-input type="text" [(ngModel)]="personInfo.nombre" name="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido: </ion-label>
+      <ion-input type="text" [(ngModel)]="personInfo.apellido" name="apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Edad: </ion-label>
+      <ion-input type="number" [(ngModel)]="personInfo.edad" name="edad"></ion-input>
+    </ion-item>
+</p-dialog>
+
 </ion-content>

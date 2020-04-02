@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { PersonasEntity } from '../models/personas.entity';
 import { ModalPage } from '../modal/modal.page';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { UserEntity } from '../models/user.entity';
-import { tokenName } from '@angular/compiler';
 
 @Component({
   selector: 'app-personas',
@@ -17,9 +14,11 @@ import { tokenName } from '@angular/compiler';
 
 export class PersonasPage implements OnInit {
 
+  personInfo = {}
   items:any;
   personasArray = [];
   personas:PersonasEntity;
+  persona:PersonasEntity;
 
   constructor(public alertController: AlertController,
     private router:Router, private personasService: PersonasService,
@@ -44,6 +43,28 @@ export class PersonasPage implements OnInit {
      return await modal.present();
    }
 
+   display: boolean = false;
+
+   showDialog(persona) {
+    this.getInfo(persona.id);      
+    this.display = true;
+  }
+
+  getInfo(id){
+    this.personasService.getInfoPersonas(id).subscribe(
+      (val) => {
+          console.log("POST call successful value returned in body");
+          console.log(val);
+          this.personInfo = val;
+      },
+      response => {
+          console.log("POST call in error", response);
+      },
+      () => {
+          console.log("The POST observable is now completed.");
+      });
+  }
+
   async mostrar(persona){
     const alert = await this.alertController.create({
       header: persona.nombre,
@@ -61,6 +82,12 @@ export class PersonasPage implements OnInit {
           text: 'Update',
           handler: ()=>{
            this.presentModal(persona);
+          }
+        },
+        {
+          text: 'Detalles',
+          handler: ()=>{
+           this.showDialog(persona);;
           }
         }
       ]

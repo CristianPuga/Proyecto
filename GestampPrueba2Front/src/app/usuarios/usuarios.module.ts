@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {PaginatorModule} from 'primeng/paginator';
+import {FullCalendarModule} from 'primeng/fullcalendar';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {PaginatorModule} from 'primeng/paginator';
     TableModule,
     DialogModule,
     DynamicDialogModule,
-    PaginatorModule
+    PaginatorModule,
+    FullCalendarModule
   ],
   declarations: [UsuariosPage]
 })

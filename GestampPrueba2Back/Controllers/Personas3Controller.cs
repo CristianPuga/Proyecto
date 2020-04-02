@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using GestampPrueba2.Infrastructure;
 using GestampPrueba.Application;
 using GestampPrueba.Application.Services;
+using AutoMapper;
+using GestampPrueba.Application.DTOs;
 
 namespace GestampPrueba2.Controllers
 {
@@ -19,7 +21,6 @@ namespace GestampPrueba2.Controllers
     [Route("/personas")]
     public class Personas3Controller : ControllerBase
     {
-        //private UnitOfWork unitOfWork = new UnitOfWork();
         private readonly IPersonasService personasService;
         public Personas3Controller(IPersonasService personasService)
         {
@@ -32,10 +33,9 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <returns>Devuelve un listado de personas</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<Personas3>> GetPersonas3()
+        public ActionResult<IEnumerable<PersonasDTO>> GetPersonas3()
         {
             var personas = personasService.GetAll();
-            personasService.metodoChorra();
             return Ok(personas);
 
         }
@@ -47,15 +47,14 @@ namespace GestampPrueba2.Controllers
         /// <param name="id"></param>
         /// <returns>Devuelve a la persona que coincida con el id que se le pasa por parametro</returns>
         [HttpGet("{id}")]
-        public ActionResult<Personas3> GetPersonas3(int id)
+        public ActionResult<PersonasDetailsDTO> GetPersonas3(int id)
         {
             Console.WriteLine(id);
-            Personas3 persona = personasService.GetById(id);
+            PersonasDetailsDTO persona = personasService.GetById(id);
             if (persona == null)
             {
                 return NotFound();
             }
-            Console.WriteLine(persona);
             return Ok(persona);
         }
        
@@ -127,7 +126,7 @@ namespace GestampPrueba2.Controllers
         public ActionResult DeletePersonas3(int id)
         {
 
-            Personas3 persona = personasService.GetById(id);
+            PersonasDetailsDTO persona = personasService.GetById(id);
 
             if (persona == null)
             {

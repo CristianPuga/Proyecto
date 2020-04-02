@@ -9,6 +9,7 @@ namespace GestampPrueba.Application
 {
     public interface IUsuariosRepository: IDisposable
     {
+        bool UsuariosExist(int id);
         void metodoChorra();
         void Save();
     }

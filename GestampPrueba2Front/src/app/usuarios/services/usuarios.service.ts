@@ -34,7 +34,7 @@ export class UsuariosService {
         
       })
     };
-    return this.http.put('http://localhost:5000/usuarios/' + user.id, user, httpOptions);
+    return this.http.put('http://localhost:5000/usuarios/activo/' + user.id, user, httpOptions);
   }
 
   deleteUsuario(usuario){
@@ -74,7 +74,7 @@ export class UsuariosService {
       })
     }
 
-    this.http.put('http://localhost:5000/usuarios/' + usuario.id,this.usuario, httpOptions).subscribe(
+    this.http.put('http://localhost:5000/usuarios/' + usuario.id, this.usuario, httpOptions).subscribe(
       (val) => {
           console.log("PUT call successful value returned in body");
           console.log(val);

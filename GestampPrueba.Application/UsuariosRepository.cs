@@ -1,4 +1,5 @@
-﻿using GestampPrueba2.Models;
+﻿using GestampPrueba.Application.DTOs;
+using GestampPrueba2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,6 +24,11 @@ namespace GestampPrueba.Application
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public bool UsuariosExist(int id)
+        {
+            return _context.Usuarios2.Any(u => u.Id == id);
         }
 
         private bool disposed = false;

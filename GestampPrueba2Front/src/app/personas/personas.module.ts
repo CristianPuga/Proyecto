@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PersonasPageRoutingModule } from './personas-routing.module';
 
 import { PersonasPage } from './personas.page';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     FormsModule,
     IonicModule,
     PersonasPageRoutingModule,
-    NgxDatatableModule
+    DialogModule
   ],
   declarations: [PersonasPage]
 })

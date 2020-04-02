@@ -17,9 +17,9 @@ import {DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 export class UsuariosPage implements OnInit {
 
   cols: any[];
-  
   usersArray = []
   usersInfo = {}
+  usersEdit = {}
   usuario:UserEntity;
   selectedUser: UserEntity;
 
@@ -40,7 +40,7 @@ export class UsuariosPage implements OnInit {
     this.cols = [
       { field: 'id', header: 'Id' },
       { field: 'nombreUsuario', header: 'Nombre Usuario' },
-      { field: 'contrasena', header: 'Contraseña' },
+      //{ field: 'contrasena', header: 'Contraseña' },
       { field: 'email', header: 'Email' },
       { field: 'activo', header: 'Inactivo/Activo' },
       { field: 'img', header: 'Img' }
@@ -54,9 +54,9 @@ export class UsuariosPage implements OnInit {
       this.display = true;
     }
 
-    showModalUser(usuario){      
-      //this.getInfo(usuario.id)
-      this.presentModal2(usuario);
+    async showModalUser(usuario){      
+      this.getInfo(usuario.id)
+      await this.presentModal2(usuario);
     }
 
     async presentModal2(usuario) {      
@@ -98,6 +98,8 @@ export class UsuariosPage implements OnInit {
           console.log("POST call successful value returned in body");
           console.log(val);
           this.usersInfo = val;
+          this.usersEdit=val;
+          console.log(this.usersEdit)
       },
       response => {
           console.log("POST call in error", response);
@@ -112,6 +114,8 @@ export class UsuariosPage implements OnInit {
   }
 
   modificar(usuario){
+    console.log(usuario);
+    
     console.log("Usuario es " +usuario.id);
     usuario.activo=!usuario.activo;
     console.log(usuario.activo);

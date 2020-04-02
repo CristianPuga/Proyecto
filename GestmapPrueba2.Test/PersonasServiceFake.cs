@@ -1,4 +1,6 @@
-﻿ using GestampPrueba.Application;
+﻿using AutoMapper;
+using GestampPrueba.Application;
+using GestampPrueba.Application.DTOs;
 using GestampPrueba.Application.Services;
 using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
@@ -16,10 +18,11 @@ namespace GestmapPrueba2.Test
    public class PersonasServiceFake: IPersonasService
     {
         private readonly List<Personas3> _personas;
+        private readonly IMapper _mapper;
 
-        public PersonasServiceFake()
+        public PersonasServiceFake(IMapper mapper)
         {
-
+            _mapper = mapper;
             _personas = new List<Personas3>()
             {
                 new Personas3() {Id = 1, Nombre = "Potato", Apellido = "Casero", Edad = 16},
@@ -28,15 +31,17 @@ namespace GestmapPrueba2.Test
             };
         }
 
-        public IEnumerable<Personas3> GetAll()
+        public IEnumerable<PersonasDTO> GetAll()
         {
-            return _personas;
+            var personas = _mapper.Map<IEnumerable<PersonasDTO>>(_personas);
+            return personas;
         }
 
-        public Personas3 GetById(int id)
+        public PersonasDetailsDTO GetById(int id)
         {
-            Console.WriteLine(id);
-            return _personas.Where(a => a.Id == id).FirstOrDefault();
+            var prueba = _personas.Where(a => a.Id == id).FirstOrDefault();
+            var persona = _mapper.Map<PersonasDetailsDTO>(prueba);
+            return persona;
         }
 
         public virtual void Delete(Personas3 entitytoDelete)

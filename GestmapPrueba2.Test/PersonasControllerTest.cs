@@ -1,4 +1,6 @@
-﻿using GestampPrueba.Application.Services;
+﻿using AutoMapper;
+using GestampPrueba.Application.DTOs;
+using GestampPrueba.Application.Services;
 using GestampPrueba2.Controllers;
 using GestampPrueba2.Infrastructure;
 using GestampPrueba2.Models;
@@ -21,22 +23,23 @@ namespace GestmapPrueba2.Test
     {
         Personas3Controller _controller;
         IPersonasService _service;
-        HttpClient client;
+        private readonly IMapper _mapper;
         public PersonasControllerTest()
         {
-            _service = new PersonasServiceFake();
+            _mapper = Setup.MapperConfig();
+            _service = new PersonasServiceFake(_mapper);
             _controller = new Personas3Controller(_service);
-            client = new HttpClient();
+
         }
 
         [Fact]
         public void Remove_NotExistingID_ReturnsNotFoundResponse()
         {
             // Arrange
-            var id = 112;
+            int id = 112;
 
             // Act
-            var badResponse = _controller.DeletePersonas3(id);
+            ActionResult badResponse = _controller.DeletePersonas3(id);
 
             // Assert
             Assert.IsType<NotFoundResult>(badResponse);
@@ -84,7 +87,7 @@ namespace GestmapPrueba2.Test
             var okResult = _controller.GetPersonas3().Result as OkObjectResult;
 
             // Assert
-            var items = Assert.IsType<List<Personas3>>(okResult.Value);
+            var items = Assert.IsType<List<PersonasDTO>>(okResult.Value);
             Assert.Equal(3, items.Count);
         }
 
@@ -109,8 +112,8 @@ namespace GestmapPrueba2.Test
             var okResult = _controller.GetPersonas3(id).Result as OkObjectResult;
 
             // Assert
-            Assert.IsType<Personas3>(okResult.Value);
-            Assert.Equal(id, (okResult.Value as Personas3).Id);
+            Assert.IsType<PersonasDetailsDTO>(okResult.Value);
+            Assert.Equal(id, (okResult.Value as PersonasDetailsDTO).Id);
         }
 
         [Fact]
@@ -169,14 +172,14 @@ namespace GestmapPrueba2.Test
         public void Check_Get_Number_In_Age()
         {
             int id = 3;
-            int edad = 50;
+            var apellido = "Hernandez";
 
             var okResult = _controller.GetPersonas3(id).Result as ObjectResult;
-            Assert.IsType<Personas3>(okResult.Value);
-            Assert.Equal(edad, (okResult.Value as Personas3).Edad);
+            Assert.IsType<PersonasDetailsDTO>(okResult.Value);
+            Assert.Equal(apellido, (okResult.Value as PersonasDetailsDTO).Apellido);
         }
 
-       /* [Fact]
+       /*[Fact]
         public void PutUser_With_Correct_Params()
         {
             int id = 4;

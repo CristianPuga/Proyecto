@@ -11,27 +11,23 @@
   <form #form="ngForm" (ngSubmit)="guardarUsuario()">
     <ion-item>
       <ion-label>Id: </ion-label>
-      <ion-input  [(ngModel)]="usuario.id" name="id" disabled required></ion-input>
+      <ion-input  [(ngModel)]="usuario.id" name="Id" disabled required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Nombre Usuario: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.nombreUsuario" name="nombreUsuario" required></ion-input>
+      <ion-input type="text" [(ngModel)]="usuario.nombreUsuario" name="NombreUsuario" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Contraseña: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.contrasena" name="contrasena" required></ion-input>
+      <ion-input type="text" [(ngModel)]="usuario.contrasena" name="Contrasena" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Email: </ion-label>
-      <ion-input type="email" [(ngModel)]="usuario.email" name="email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Activo: </ion-label>
-      <ion-input type="boolean" [(ngModel)]="usuario.activo" name="activo" disabled required></ion-input>
+      <ion-input type="email" [(ngModel)]="usuario.email" name="Email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Imagen: </ion-label>
-      <ion-input type="text" [(ngModel)]="usuario.img" name="img" required></ion-input>
+      <ion-input type="text" [(ngModel)]="usuario.img" name="Img" required></ion-input>
     </ion-item>
     <ion-button  size="large" type="submit" expand="block" >Actualizar</ion-button>
   </form>

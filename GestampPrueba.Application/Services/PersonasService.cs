@@ -1,4 +1,6 @@
-﻿using GestampPrueba2.Models;
+﻿using AutoMapper;
+using GestampPrueba.Application.DTOs;
+using GestampPrueba2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,11 @@ namespace GestampPrueba.Application.Services
     public class PersonasService: IPersonasService
     {
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
+        private readonly IMapper _mapper;
+        public PersonasService(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
         public Personas3 Insert(Personas3 newPersona)
         {
             unitOfWork.PersonasRepository.Insert(newPersona);
@@ -16,14 +23,19 @@ namespace GestampPrueba.Application.Services
             return newPersona;
         }
 
-        public IEnumerable<Personas3> GetAll()
+        public IEnumerable<PersonasDTO> GetAll()
         {
-            return unitOfWork.PersonasRepository.Get();
+            var personas = unitOfWork.PersonasRepository.Get();
+            var mapping = _mapper.Map<IEnumerable<PersonasDTO>>(personas);
+            return mapping.ToList();
+            //return unitOfWork.PersonasRepository.Get();
         }
 
-        public Personas3 GetById(int id)
+        public PersonasDetailsDTO GetById(int id)
         {
-            return unitOfWork.PersonasRepository.GetByID(id);
+            var persona = unitOfWork.PersonasRepository.GetByID(id);
+            var mapping = _mapper.Map<PersonasDetailsDTO>(persona);
+            return mapping;
         }
 
         public void Delete(int id)

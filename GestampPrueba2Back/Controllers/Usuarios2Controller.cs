@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Swashbuckle.Swagger.Annotations;
 using GestampPrueba.Application;
 using AutoMapper;
+using GestampPrueba.Application.DTOs;
 
 namespace GestampPrueba2.Controllers
 {
@@ -20,12 +21,10 @@ namespace GestampPrueba2.Controllers
     public class Usuarios2Controller : ControllerBase
     {
          private readonly IUsuariosService usuarioService;
-        private readonly IMapper _mapper;
 
-        public Usuarios2Controller(IUsuariosService usuariosService, IMapper mapper)
+        public Usuarios2Controller(IUsuariosService usuariosService)
         {
             usuarioService = usuariosService;
-            _mapper = mapper;
         }
 
         // GET: api/Usuarios2
@@ -35,12 +34,12 @@ namespace GestampPrueba2.Controllers
         /// </summary>
         /// <returns>Devuelve un listado de usuarios</returns>
         [HttpGet]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<Usuarios2>))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(IEnumerable<UsuariosDTO>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
-        public IEnumerable<Usuarios2> GetUsuarios2()
+        public ActionResult<IEnumerable<UsuariosDTO>> GetUsuarios2()
         {
             var usuarios = usuarioService.GetAll();
-            return usuarios.ToList();
+            return Ok(usuarios);
         }
 
         // GET: api/Usuarios2/5
@@ -50,11 +49,11 @@ namespace GestampPrueba2.Controllers
         /// <param name="id"></param>
         /// <returns>Devuelve al usuario que coincida con el id que se le pasa por parametro</returns>
         [HttpGet("{id}")]
-        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(Usuarios2))]
+        [SwaggerResponse(StatusCodes.Status200OK, Type = typeof(UsuariosDetailsDTO))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
-        public async Task<ActionResult<Usuarios2>> GetUsuarios2(int id)
+        public ActionResult<UsuariosDetailsDTO> GetUsuarios2(int id)
         {
-            Usuarios2 usuario = usuarioService.GetById(id);
+            UsuariosDetailsDTO usuario = usuarioService.GetById(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -74,28 +73,61 @@ namespace GestampPrueba2.Controllers
         [HttpPut("{id}")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Updated Object", Type = typeof(NoContentResult))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
-        public async Task<ActionResult> PutUsuario(int id, [FromBody] Usuarios2 usuarios2)
+        public ActionResult PutUsuario(int id, [FromBody] UsuariosEditDTO usuariosEditDTO)
         {
-            Console.WriteLine(usuarios2);
-            if (id != usuarios2.Id)
+            Console.WriteLine(usuariosEditDTO.Id);
+            Console.WriteLine(usuariosEditDTO.NombreUsuario);
+            Console.WriteLine(usuariosEditDTO.Img);
+            Console.WriteLine(usuariosEditDTO.Email);
+
+
+            if (id != usuariosEditDTO.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                usuarioService.Update(usuarios2);
+                usuarioService.Update(usuariosEditDTO);
             }
             catch (DbUpdateConcurrencyException)
             {
-                /*if (!UsuarioExist(id))
+                if (!usuarioService.UsuariosExist(id))
                 {
                     return NotFound();
                 }
                 else
                 {
                     throw;
-                }*/
+                }
+            }
+            return Ok(usuariosEditDTO);
+        }
+
+        [HttpPut("activo/{id}")]
+        [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Updated Object", Type = typeof(NoContentResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
+        public ActionResult PutUsuarioActivo(int id, [FromBody] UsuariosActivoDTO usuariosActivoDTO)
+        {
+            if (id != usuariosActivoDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                usuarioService.UpdateActivo(usuariosActivoDTO);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!usuarioService.UsuariosExist(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
             return NoContent();
         }
@@ -110,10 +142,15 @@ namespace GestampPrueba2.Controllers
         /// <returns>Devuelve al usuario que se ha introducido</returns>
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult<Usuarios2>> PostUsuario([FromBody] Usuarios2 usuarios2)
+        public ActionResult PostUsuario([FromBody] UsuariosPostDTO usuariosPostDTO)
         {
-            usuarioService.Insert(usuarios2);
-            return usuarios2;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            usuarioService.Insert(usuariosPostDTO);
+            return CreatedAtAction("GetUsuarios2", new { id = usuariosPostDTO.Id }, usuariosPostDTO);
         }
 
         // DELETE: api/Usuarios2/5
@@ -125,15 +162,15 @@ namespace GestampPrueba2.Controllers
         [HttpDelete("{id}")]
         [SwaggerResponse(StatusCodes.Status204NoContent, Description = "Deleted Object", Type = typeof(NoContentResult))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
-        public async Task<ActionResult<Usuarios2>> DeleteUsuarios2(int id)
+        public ActionResult DeleteUsuarios2(int id)
         {
-            Usuarios2 usuario = usuarioService.GetById(id);
+            UsuariosDetailsDTO usuario = usuarioService.GetById(id);
             if (usuario == null)
             {
                 return NotFound();
             }
             usuarioService.Delete(id);
-            return usuario;
+            return Ok();
         }
     }
 }

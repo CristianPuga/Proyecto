@@ -18,8 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using GestampPrueba.Application;
 using GestampPrueba.Application.Services;
-using GestampPrueba.Models.DTOs;
 using AutoMapper;
+using GestampPrueba.Application.DTOs;
 
 namespace GestampPrueba2
 {
@@ -37,7 +37,7 @@ namespace GestampPrueba2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapping));
 
             services.AddDbContext<masterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MasterDatabase")));
 
@@ -90,6 +90,7 @@ namespace GestampPrueba2
             services.AddTransient<IUsuariosRepository, UsuariosRepository>();
             services.AddScoped<IUsuariosService, UsuariosService>();
             services.AddScoped<IPersonasService, PersonasService>();
+
 
             services.AddControllers();
         }

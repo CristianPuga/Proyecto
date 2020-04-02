@@ -47,7 +47,6 @@
       <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
           <td>{{rowData.id}}</td>
           <td>{{rowData.nombreUsuario}}</td>
-          <td>{{rowData.contrasena}}</td>
           <td>{{rowData.email}}</td>
           <td><ion-toggle name="activo" color="light" [checked]="rowData.activo" (click)="modificar(rowData)"></ion-toggle></td>
           <td>
@@ -61,11 +60,10 @@
       </tr>
   </ng-template>
 </p-table>
-<p-paginator [rows]="1"[rowsPerPageOptions]="[2,4,6]" [totalRecords]="5"></p-paginator>
 
+<p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
 
-
-<p-dialog header="Actualizar usuario" [transitionOptions]="'15ms'" [(visible)]="display">
+<p-dialog header="Detalles usuario" [transitionOptions]="'15ms'" [(visible)]="display">
     <ion-item>
       <ion-label>Id: </ion-label>
       <ion-input  [(ngModel)]="usersInfo.id" name="id" required></ion-input>
@@ -81,10 +79,6 @@
     <ion-item>
       <ion-label>Activo: </ion-label>
       <ion-input type="text" [(ngModel)]="usersInfo.activo" name="activo"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Imagen: </ion-label>
-      <ion-input type="text" [(ngModel)]="usersInfo.img" name="img"></ion-input>
     </ion-item>
 </p-dialog>
 

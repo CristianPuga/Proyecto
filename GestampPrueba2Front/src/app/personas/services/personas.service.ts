@@ -25,6 +25,12 @@ export class PersonasService {
     return this.http.get('http://localhost:5000/personas');
   }
 
+  getInfoPersonas(id): Observable<any>{
+    console.log("Obteniendo detaller persona");
+    return this.http.get('http://localhost:5000/personas/' + id);
+    
+  }
+
   //Borrar a una persona de la base de datos por ID
   deletePersona(persona){
     this.http.delete('http://localhost:5000/personas/' + persona.id).subscribe(

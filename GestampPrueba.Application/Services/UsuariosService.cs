@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GestampPrueba.Application.DTOs;
 using GestampPrueba2.Models;
 using System;
 using System.Collections.Generic;
@@ -10,31 +11,32 @@ namespace GestampPrueba.Application
     public class UsuariosService: IUsuariosService
     {
         private readonly UnitOfWork unitOfWork = new UnitOfWork();
-      /*  private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public UsuariosService(IMapper mapper)
         {
             _mapper = mapper;
-        }*/
+        }
 
-        public void Insert(Usuarios2 newUsuario)
-        {
-            unitOfWork.UsuariosRepository.Insert(newUsuario);
+        public void Insert(UsuariosPostDTO newUsuario)
+        { 
+            var mapping = _mapper.Map<Usuarios2>(newUsuario);
+            unitOfWork.UsuariosRepository.Insert(mapping);
             unitOfWork.Save();
         }
 
-        public IEnumerable<Usuarios2> GetAll()
+        public IEnumerable<UsuariosDTO> GetAll()
         {
-           /* var usuarios = unitOfWork.UsuariosRepository.Get();
-            UsuariosShowDTO usuariosShowDTO = _mapper.Map<UsuariosShowDTO>(usuarios);
-            return usuariosShowDTO;*/
-
-            return unitOfWork.UsuariosRepository.Get();
+            var usuarios = unitOfWork.UsuariosRepository.Get();
+            var mapping = _mapper.Map<IEnumerable<UsuariosDTO>>(usuarios);
+            return mapping.ToList();
         }
 
-        public Usuarios2 GetById(int id)
+        public UsuariosDetailsDTO GetById(int id)
         {
-            return unitOfWork.UsuariosRepository.GetByID(id);
+            var usuario = unitOfWork.UsuariosRepository.GetByID(id);
+            var mapping = _mapper.Map<UsuariosDetailsDTO>(usuario);
+            return mapping;
         }
 
         public void Delete(int id)
@@ -43,9 +45,17 @@ namespace GestampPrueba.Application
             unitOfWork.Save();
         }
 
-        public void Update(Usuarios2 modUsuario)
+        public void Update(UsuariosEditDTO modUsuario)
         {
-            unitOfWork.UsuariosRepository.Update(modUsuario);
+            var mapping = _mapper.Map<Usuarios2>(modUsuario);
+            unitOfWork.UsuariosRepository.Update(mapping);
+            unitOfWork.Save();
+        }
+
+        public void UpdateActivo(UsuariosActivoDTO modActivo)
+        {
+            var mapping = _mapper.Map<Usuarios2>(modActivo);
+            unitOfWork.UsuariosRepository.Update(mapping);
             unitOfWork.Save();
         }
 
@@ -54,12 +64,9 @@ namespace GestampPrueba.Application
             unitOfWork.UsuariosRepository.metodoChorra();
         }
 
-        /*private bool UsuarioExist(int id)
+        public bool UsuariosExist(int id)
         {
-            if (unitOfWork.UsuariosRepository.GetByID(id))
-            {
-
-            }
-        }*/
+            return unitOfWork.UsuariosRepository.UsuariosExist(id);
+        }
     }
 }

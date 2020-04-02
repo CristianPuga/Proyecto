@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GestampPrueba.Models
+namespace GestampPrueba.Application.DTOs
 {
-   public class Usuarios2
+    public partial class UsuariosDTO
     {
         public int Id { get; set; }
         public string NombreUsuario { get; set; }
