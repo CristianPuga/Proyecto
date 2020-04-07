@@ -48,10 +48,14 @@ export class UsuariosPage implements OnInit {
   }
 
   display: boolean = false;
-
+  display2: boolean = false;
     showDialog(user) {
       this.getInfo(user.id);      
       this.display = true;
+    }
+
+    showCalendar() { 
+      this.display2 = true;
     }
 
     async showModalUser(usuario){      
@@ -64,7 +68,7 @@ export class UsuariosPage implements OnInit {
       const modal2 = await this.modalController.create({
        component: ModalUsersPage,
        componentProps: {
-         'usuario': usuario,
+         'usuario': this.usersEdit,
        }
      
      });

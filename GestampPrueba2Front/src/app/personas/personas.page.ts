@@ -66,9 +66,10 @@ export class PersonasPage implements OnInit {
   }
 
   async mostrar(persona){
+    this.getInfo(persona.id)
     const alert = await this.alertController.create({
       header: persona.nombre,
-      message: `¿Que deseas hacer con ${persona.nombre} ${persona.apellido}?`,
+      message: `¿Que deseas hacer con ${persona.nombre}?`,
       buttons: [
         {text: 'Cancel'},
         {text: 'Delete',
@@ -81,7 +82,7 @@ export class PersonasPage implements OnInit {
         {
           text: 'Update',
           handler: ()=>{
-           this.presentModal(persona);
+           this.presentModal(this.personInfo);
           }
         },
         {

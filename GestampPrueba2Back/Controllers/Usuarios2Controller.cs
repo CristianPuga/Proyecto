@@ -21,7 +21,7 @@ namespace GestampPrueba2.Controllers
     public class Usuarios2Controller : ControllerBase
     {
          private readonly IUsuariosService usuarioService;
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(Usuarios2Controller));
         public Usuarios2Controller(IUsuariosService usuariosService)
         {
             usuarioService = usuariosService;
@@ -38,6 +38,7 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, Type = typeof(BadRequestResult))]
         public ActionResult<IEnumerable<UsuariosDTO>> GetUsuarios2()
         {
+            log.Info("Hello logging world!");
             var usuarios = usuarioService.GetAll();
             return Ok(usuarios);
         }
@@ -123,6 +124,7 @@ namespace GestampPrueba2.Controllers
                 if (!usuarioService.UsuariosExist(id))
                 {
                     return NotFound();
+
                 }
                 else
                 {
@@ -164,6 +166,7 @@ namespace GestampPrueba2.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "Object Not Found", Type = typeof(NotFoundResult))]
         public ActionResult DeleteUsuarios2(int id)
         {
+            log.Info("Usuario borrado");
             UsuariosDetailsDTO usuario = usuarioService.GetById(id);
             if (usuario == null)
             {

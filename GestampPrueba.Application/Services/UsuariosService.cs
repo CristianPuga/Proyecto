@@ -47,14 +47,16 @@ namespace GestampPrueba.Application
 
         public void Update(UsuariosEditDTO modUsuario)
         {
-            var mapping = _mapper.Map<Usuarios2>(modUsuario);
+            var personas = unitOfWork.UsuariosRepository.GetByID(modUsuario.Id);
+            var mapping = _mapper.Map(modUsuario, personas);
             unitOfWork.UsuariosRepository.Update(mapping);
             unitOfWork.Save();
         }
 
         public void UpdateActivo(UsuariosActivoDTO modActivo)
         {
-            var mapping = _mapper.Map<Usuarios2>(modActivo);
+            var obtener = unitOfWork.UsuariosRepository.GetByID(modActivo.Id);
+            var mapping = _mapper.Map(modActivo, obtener);
             unitOfWork.UsuariosRepository.Update(mapping);
             unitOfWork.Save();
         }

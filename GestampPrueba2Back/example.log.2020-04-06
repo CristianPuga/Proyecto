@@ -1,0 +1,23 @@
+2020-04-06 08:26:52,049  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:5001
+ 2020-04-06 08:26:52,059  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5000
+ 2020-04-06 08:26:52,060  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-04-06 08:26:52,060  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-04-06 08:26:52,060  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba2Back
+ 2020-04-06 08:57:31,579  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application is shutting down...
+ 2020-04-06 08:57:46,525  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:5001
+ 2020-04-06 08:57:46,533  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5000
+ 2020-04-06 08:57:46,534  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-04-06 08:57:46,534  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-04-06 08:57:46,534  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba2Back
+ 2020-04-06 09:03:43,824  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application is shutting down...
+ 2020-04-06 09:03:52,888  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: https://localhost:5001
+ 2020-04-06 09:03:52,898  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://localhost:5000
+ 2020-04-06 09:03:52,899  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-04-06 09:03:52,899  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-04-06 09:03:52,899  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\Usuario\Documents\GitHub\Proyecto23\GestampPrueba2Back
+ 2020-04-06 09:06:25,492  INFO GestampPrueba2.Controllers.Usuarios2Controller.? [?] - MESSAGE: Hello logging world!
+ 2020-04-06 09:09:39,514  INFO GestampPrueba2.Controllers.Usuarios2Controller.? [?] - MESSAGE: Usuario borrado
+ 2020-04-06 09:10:37,345  INFO GestampPrueba2.Controllers.Usuarios2Controller.? [?] - MESSAGE: Hello logging world!
+ 2020-04-06 09:10:37,373  INFO GestampPrueba2.Controllers.Usuarios2Controller.? [?] - MESSAGE: Hello logging world!
+ 2020-04-06 09:24:27,080  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application is shutting down...
+ 
